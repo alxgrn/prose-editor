@@ -1,16 +1,16 @@
 import { FC, useEffect, useState } from "react";
 import { EditorState } from "prosemirror-state";
-import { plugins } from './plugins';
+import { plugins } from "./plugins";
 import { ProseMirror, ProseMirrorDoc } from "@handlewithcare/react-prosemirror";
 import { TImageUploader, TNotesSaver, TPublication } from "../types";
 import { simpleSchema, toSimpleSchema } from "./schema";
 import SimpleMenuBar from "./menubar/SimpleMenuBar";
-import './ProseMirror.css';
-import './ProseViewer.css';
-import './ProseNotes.css';
 import SaveButton from "./menubar/elements/SaveButton";
 import ImageView from "./views/ImageView";
 import VideoView from "./views/VideoView";
+import './ProseMirror.css';
+import './ProseViewer.css';
+import './ProseNotes.css';
 
 type Props = {
     title?: boolean | string | null; // нужно ли выводить поле ввода для заголовка публикации и его начальное содержимое

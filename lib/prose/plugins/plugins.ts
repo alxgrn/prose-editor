@@ -9,7 +9,7 @@ import { dropCursor } from "prosemirror-dropcursor";
 import { gapCursor } from "prosemirror-gapcursor";
 import { Schema } from "prosemirror-model";
 import { buildKeymap, buildInputRules } from "prosemirror-example-setup";
-import { placeholderPlugin } from "./ImageUpload";
+import { placeholderPlugin } from "./imageUpload";
 import { goToNextCell, tableEditing } from "prosemirror-tables";
 //import { selectPlugin } from "./plugins/select";
 

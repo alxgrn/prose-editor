@@ -3,7 +3,7 @@
  */
 import { FC, useEffect, useState } from "react";
 import './TableCellResizer.css';
-import { colsWidthFromDOM } from "../utils";
+import { colsWidthFromDOM } from "../../utils/utils";
 
 type Props = {
     parent?: HTMLTableCellElement|null;

@@ -5,8 +5,8 @@ import { FC, useEffect, useState } from 'react';
 import { Form, Icons, Image, Input, Modal } from '@alxgrn/telefrag-ui';
 import { useEditorEventCallback } from '@handlewithcare/react-prosemirror';
 import { Schema } from 'prosemirror-model';
-import { startImageUpload } from '../../ImageUpload';
 import { TImageUploader } from '../../../types';
+import { startImageUpload } from '../../plugins/imageUpload';
 
 export interface Props {
     schema: Schema;

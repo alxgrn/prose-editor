@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { content as initialContent } from './content';
 import { Editor, Notes, Viewer } from '../lib';
 import ModeSelector from './ModeSelector';
-import { getImageIdsFromProse } from '../lib/prose/utils';
+import { getImageIdsFromProse } from '../lib/utils/utils';
 import './App.css'
 
 const App = () => {

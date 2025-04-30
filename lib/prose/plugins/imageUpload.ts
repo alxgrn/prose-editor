@@ -5,7 +5,7 @@
 import { Schema } from "prosemirror-model";
 import { EditorState, Plugin } from "prosemirror-state"
 import { Decoration, DecorationSet, EditorView } from "prosemirror-view"
-import { TImageUploader } from "../types";
+import { TImageUploader } from "../../types";
 import './ImageUpload.css';
 
 export const placeholderPlugin = new Plugin({

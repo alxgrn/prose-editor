@@ -5,7 +5,7 @@ import { Icons } from "@alxgrn/telefrag-ui";
 import { NodeViewComponentProps, useEditorEventCallback } from "@handlewithcare/react-prosemirror";
 import { deleteTable } from "prosemirror-tables";
 import { forwardRef, useEffect, useState } from "react";
-import { colsWidthFromNode } from "../utils";
+import { colsWidthFromNode } from "../../utils/utils";
 import './TableView.css';
 
 const TableView = forwardRef<HTMLTableElement, NodeViewComponentProps>(

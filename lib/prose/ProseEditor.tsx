@@ -1,18 +1,18 @@
 import { FC, useEffect, useState } from "react";
 import { EditorState } from "prosemirror-state";
-import { plugins } from './plugins';
+import { plugins } from "./plugins";
 import { ProseMirror, ProseMirrorDoc } from "@handlewithcare/react-prosemirror";
 import { TEditorSaver, TImageUploader } from "../types";
 import { Node } from "prosemirror-model";
 import { undoDepth } from 'prosemirror-history';
 import MenuBar from "./menubar/MenuBar";
+import VideoView from "./views/VideoView";
 import ImageView from "./views/ImageView";
 import TableView from "./views/TableView";
 import TableCellView from "./views/TableCellView";
 import { fixTables } from "prosemirror-tables";
 import { schema } from "./schema";
 import './ProseViewer.css';
-import VideoView from "./views/VideoView";
 
 type Props = {
     content: string | null; // Содержимое статьи
