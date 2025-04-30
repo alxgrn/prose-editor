@@ -9,6 +9,5 @@
     top: var(--alxgrn-layout-header-height);
     background-color: var(--alxgrn-bg-panel);
     z-index: 100;
-    padding-top: var(--alxgrn-unit-double);
-    padding-bottom: var(--alxgrn-unit-half);
+    padding: var(--alxgrn-unit-half) 0;
 }
