@@ -1,0 +1,149 @@
+/**
+ * Оригинал из https://github.com/ProseMirror/prosemirror-tables/blob/master/style/tables.css
+ * но с нашими дополнениями
+ */
+.ProseMirror .tableWrapper {
+    overflow-x: auto;
+    /* visual */
+    margin: 1em 0;
+}
+
+.ProseMirror table {
+    border-collapse: collapse;
+    table-layout: fixed;
+    width: 100%;
+    /* overflow: hidden; */
+    /* visual */
+    margin: var(--alxgrn-unit-double) 0 var(--alxgrn-unit) 0;
+}
+
+.ProseMirror td,
+.ProseMirror th {
+    text-align: left;
+    vertical-align: top;
+    box-sizing: border-box;
+    position: relative;
+    /* visual */
+    min-width: 1em;
+    border: 1px solid #ddd;
+    padding: var(--alxgrn-unit-small) var(--alxgrn-unit-half);
+}
+
+/* visual */
+.ProseMirror th {
+    font-weight: bold;
+    text-align: center;
+    vertical-align: middle;
+    background-color: darkseagreen;
+}
+
+.ProseMirror td:not([data-colwidth]):not(.column-resize-dragging),
+.ProseMirror th:not([data-colwidth]):not(.column-resize-dragging) {
+    /* if there's no explicit width set and the column is not being resized, set a default width */
+    min-width: var(--default-cell-min-width);
+}
+
+.ProseMirror .column-resize-handle {
+    position: absolute;
+    right: -2px;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    z-index: 20;
+    background-color: #adf;
+    pointer-events: none;
+}
+
+.ProseMirror.resize-cursor {
+    cursor: ew-resize;
+    cursor: col-resize;
+}
+
+/* Give selected cells a blue overlay */
+/*
+.ProseMirror .selectedCell:after {
+    z-index: 2;
+    position: absolute;
+    content: '';
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background: rgba(200, 200, 255, 0.4);
+    pointer-events: none;
+}
+*/
+.ProseMirror .selectedCell {
+    background-color: #adf;
+}
+
+/* Заголовок таблицы используем для иконки удаления */
+.ProseMirror table {
+    position: relative;
+    width: calc(100% - var(--alxgrn-unit));
+    margin-left: var(--alxgrn-unit);
+}
+
+.ProseMirror table caption {
+    position: absolute;
+    top: calc(-1 * var(--alxgrn-unit));
+    left: calc(-1 * var(--alxgrn-unit));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    border: none;
+    width: var(--alxgrn-unit);
+    height: var(--alxgrn-unit);
+    font-size: var(--alxgrn-font-size-small);
+    cursor: pointer;
+    color: var(--alxgrn-color-light);
+    background-color: transparent;
+}
+
+.ProseMirror table caption:hover {
+    color: var(--alxgrn-color-accent);
+}
+
+/* Первая ячейка каждого ряда */
+.ProseMirror table tbody tr th:first-child::after,
+.ProseMirror table tbody tr td:first-child::after {
+    content: ' ';
+    display: block;
+    background-color: var(--alxgrn-border);
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 100%;
+    width: var(--alxgrn-unit);
+    border-top-left-radius: var(--alxgrn-unit-small);
+    border-bottom-left-radius: var(--alxgrn-unit-small);
+}
+
+/* У первой ячейки последнего ряда уберем белый бордер снизу */
+.ProseMirror table tbody tr:last-child th:first-child::after,
+.ProseMirror table tbody tr:last-child td:first-child::after {
+    bottom: -1px;
+}
+
+
+/* Ячейки первого ряда */
+.ProseMirror table tbody tr:first-child th::before,
+.ProseMirror table tbody tr:first-child td::before {
+    content: ' ';
+    display: block;
+    background-color: var(--alxgrn-border);
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 100%;
+    height: var(--alxgrn-unit);
+    border-top-left-radius: var(--alxgrn-unit-small);
+    border-top-right-radius: var(--alxgrn-unit-small);
+}
+
+/* У последней ячейки первого ряда уберем белый бордер справа */
+.ProseMirror table tbody tr:first-child th:last-child::before,
+.ProseMirror table tbody tr:first-child td:last-child::before {
+    right: -1px;
+}

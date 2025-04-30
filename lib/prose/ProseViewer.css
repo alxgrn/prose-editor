@@ -1,0 +1,206 @@
+.ProseViewer {
+    display: block;
+}
+
+.ProseViewer .unknown_node_type {
+    display: block;
+    color: red;
+}
+
+.ProseNotes p:first-child,
+.ProseEditor p:first-child,
+.ProseViewer p:first-child {
+    margin-top: 0;
+}
+
+.ProseNotes p:last-child,
+.ProseEditor p:last-child,
+.ProseViewer p:last-child {
+    margin-bottom: 0;
+}
+
+.ProseNotes ul,
+.ProseEditor ul,
+.ProseViewer ul,
+.ProseNotes ol,
+.ProseEditor ol,
+.ProseViewer ol,
+.ProseNotes ul p,
+.ProseEditor ul p,
+.ProseViewer ul p,
+.ProseNotes ol p,
+.ProseEditor ol p,
+.ProseViewer ol p {
+    margin: 0;
+    padding: 0;
+}
+
+.ProseNotes li,
+.ProseEditor li,
+.ProseViewer li {
+    padding: 0;
+    margin: 0;
+    margin-left: var(--alxgrn-unit-double);
+}
+
+.ProseNotes blockquote,
+.ProseEditor blockquote,
+.ProseViewer blockquote {
+    display: block;
+    margin: 0;
+    border-left: var(--alxgrn-unit-small) solid var(--alxgrn-color-accent);
+    margin: var(--alxgrn-unit) 0;
+    padding: var(--alxgrn-unit-half);
+    border-radius: var(--alxgrn-unit-small);
+    background-color: var(--alxgrn-bg-accent);
+}
+
+.ProseNotes div.image,
+.ProseEditor div.image,
+.ProseViewer div.image,
+.ProseNotes div.video,
+.ProseEditor div.video,
+.ProseViewer div.video {
+    display: block;
+    margin: var(--alxgrn-unit) auto;
+    text-align: center;
+}
+
+.ProseNotes div.image img,
+.ProseEditor div.image img,
+.ProseViewer div.image img {
+    display: block;
+    border-radius: var(--alxgrn-unit-small);
+    max-width: 100%;
+    margin: 0 auto;
+    background-color: var(--alxgrn-border);
+}
+
+.ProseViewer div.image::after {
+    content: attr(title);
+    font-style: italic;
+    display: block;
+    width: 80%;
+    margin: 0 auto;
+}
+
+.ProseViewer div.image img {
+    cursor: pointer;
+}
+
+.ProseViewer div.image:fullscreen {
+    background-color: black;
+    border-radius: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.ProseViewer div.image:fullscreen::after {
+    display: none;
+}
+
+.ProseViewer div.image:fullscreen img {
+    border-radius: 0;
+}
+
+.ProseNotes div.video iframe,
+.ProseEditor div.video iframe,
+.ProseViewer div.video iframe {
+    display: block;
+    border-radius: var(--alxgrn-unit-small);
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    border: none;
+    margin: 0 auto;
+    background-color: var(--alxgrn-border);
+}
+
+.ProseViewer div.video::after {
+    content: attr(title);
+    font-style: italic;
+    display: block;
+    width: 80%;
+    margin: 0 auto;
+}
+
+.ProseNotes div.image > div,
+.ProseEditor div.image > div,
+.ProseNotes div.video > div,
+.ProseEditor div.video > div {
+    font-style: italic;
+    width: 80%;
+    margin: 0 auto;
+}
+
+.ProseNotes pre,
+.ProseEditor pre,
+.ProseViewer pre {
+    white-space: pre-wrap;
+    background-color: var(--alxgrn-bg-light);
+    border-radius: var(--alxgrn-unit-small);
+    padding: var(--alxgrn-unit-small) var(--alxgrn-unit-half);
+}
+
+.ProseViewer hr {
+    display: block;
+    border: none;
+    border-top: 1px solid var(--alxgrn-border);
+    margin: var(--alxgrn-unit) 0;
+}
+
+/**
+ * Ниже весь огород с ячейками для закругленных уголков у таблицы
+ */
+.ProseViewer table {
+    width: 100%;
+    margin: var(--alxgrn-unit) 0;
+    border-spacing: 0;
+}
+
+.ProseViewer th,
+.ProseViewer td {
+    text-align: left;
+    vertical-align: top;
+    min-width: var(--alxgrn-unit);
+    border-right: 1px solid var(--alxgrn-border);
+    border-bottom: 1px solid var(--alxgrn-border);
+    padding: var(--alxgrn-unit-small) var(--alxgrn-unit-half);
+}
+
+.ProseViewer th {
+    font-weight: bold;
+    text-align: center;
+    vertical-align: middle;
+    background-color: darkseagreen;
+}
+
+.ProseViewer th:first-child,
+.ProseViewer td:first-child {
+    border-left: 1px solid var(--alxgrn-border);
+}
+
+.ProseViewer tr:first-child>th,
+.ProseViewer tr:first-child>td {
+    border-top: 1px solid var(--alxgrn-border);
+}
+
+.ProseViewer tr:first-child>th:first-child,
+.ProseViewer tr:first-child>td:first-child {
+    border-top-left-radius: var(--alxgrn-unit-small);
+}
+
+.ProseViewer tr:first-child>th:last-child,
+.ProseViewer tr:first-child>td:last-child {
+    border-top-right-radius: var(--alxgrn-unit-small);
+}
+
+.ProseViewer tr:last-child>th:first-child,
+.ProseViewer tr:last-child>td:first-child {
+    border-bottom-left-radius: var(--alxgrn-unit-small);
+}
+
+.ProseViewer tr:last-child>th:last-child,
+.ProseViewer tr:last-child>td:last-child {
+    border-bottom-right-radius: var(--alxgrn-unit-small);
+}

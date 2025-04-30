@@ -1,0 +1,17 @@
+.MenuItem {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    padding: var(--alxgrn-unit-smallest);
+}
+
+.MenuItem.active {
+    background: var(--alxgrn-bg-accent);
+    border-radius: var(--alxgrn-unit-smallest);
+}
+
+.MenuItem.disabled {
+    cursor: default;
+    opacity: 0.3;
+}

@@ -1,0 +1,15 @@
+.MenuBlock {
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    gap: var(--alxgrn-unit-small);
+    border-right: 1px solid var(--alxgrn-border);
+    padding-right: var(--alxgrn-unit-small);
+}
+
+.MenuBlock:last-child {
+    border-right: none;
+    padding-right: 0;
+    flex: 1 1 auto;
+    justify-content: flex-end;
+}

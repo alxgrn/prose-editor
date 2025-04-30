@@ -1,0 +1,20 @@
+
+/* Блок для изменения размера ячейки таблицы */
+.ProseMirror-cell-resizer {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: calc(100% - var(--alxgrn-unit-small));
+    bottom: 0;
+    width: var(--alxgrn-unit-half);
+}
+
+.ProseMirror-cell-resizer:hover {
+    cursor: ew-resize;
+    cursor: col-resize;
+    background-color: #8cf;
+}
+
+.ProseMirror-cell-resizer.dragging {
+    background-color: aquamarine;
+}

@@ -1,0 +1,37 @@
+* {
+    box-sizing: border-box;
+    overflow-wrap: anywhere;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+
+    font-family: var(--alxgrn-font-family);
+    line-height: var(--alxgrn-line-height);
+    font-weight: 400;
+    font-size: var(--alxgrn-font-size);
+
+    color: var(--alxgrn-color-text);
+    background-color: var(--alxgrn-bg-main);
+
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+a, a:link, a:visited, a:active, .a {
+    cursor: pointer;
+    color: var(--alxgrn-color-accent);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+}
+
+a:hover, .a:hover {
+    border-bottom: 1px solid var(--alxgrn-color-accent);
+}
+
+small, .small {
+    font-size: var(--alxgrn-font-size-small);
+}

@@ -1,0 +1,14 @@
+.MenuBar {
+    display: flex;
+    align-items: center;
+    gap: var(--alxgrn-unit-small);
+    flex-wrap: wrap;
+    border: none;
+    border-bottom: 2px solid var(--alxgrn-color-text)!important;
+    position: sticky;
+    top: var(--alxgrn-layout-header-height);
+    background-color: var(--alxgrn-bg-panel);
+    z-index: 100;
+    padding-top: var(--alxgrn-unit-double);
+    padding-bottom: var(--alxgrn-unit-half);
+}

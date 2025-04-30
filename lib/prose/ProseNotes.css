@@ -1,0 +1,73 @@
+.ProseNotes {
+    display: flex;
+    gap: var(--alxgrn-unit-small);
+    flex-direction: column;
+    border: 1px solid var(--alxgrn-border);
+    padding: var(--alxgrn-unit-small);
+    border-radius: var(--alxgrn-unit-small);
+}
+
+.ProseNotesTitle,
+.ProseNotesTitle:focus {
+    width: 100%;
+    color: var(--alxgrn-color-text);
+    border: 1px solid var(--alxgrn-border);
+    border-radius: var(--alxgrn-unit-small);
+    background-color: transparent;
+    outline: none;
+    padding: var(--alxgrn-unit-half);
+    font-size: var(--alxgrn-font-size);
+}
+
+.ProseNotesTitle::placeholder {
+    color: var(--alxgrn-color-text);
+    opacity: 0.5;
+    font-style: italic;
+}
+
+.ProseNotes .ProseMirror {
+    overflow: auto;
+    min-height: 20vh;
+    max-height: 45vh;
+    padding: var(--alxgrn-unit-small);
+    padding-right: var(--alxgrn-unit-half);
+}
+
+.ProseNotesButtons {
+    display: flex;
+    gap: var(--alxgrn-unit);
+    align-items: center;
+    justify-content: flex-end;
+    border-top: 1px solid var(--alxgrn-border);
+    padding: var(--alxgrn-unit-small);
+    padding-top: var(--alxgrn-unit-half);
+}
+
+/*
+ * Scrollbar
+ * Содрано с Modal из @alxgrn/react-form но надо унифицировать где-то в одном месте
+ *
+ .QuillNotesContent .ql-container {
+    scrollbar-color: transparent var(--alxgrn-modal-color-scroll);
+    scrollbar-width: thin;
+}*/
+
+.ProseNotes .ProseMirror::-webkit-scrollbar {
+    width: var(--alxgrn-unit-small);
+    height: var(--alxgrn-unit-small);
+}
+
+.ProseNotes .ProseMirror::-webkit-scrollbar-track {
+    background-color: transparent;
+    border-radius: var(--alxgrn-unit-small);
+}
+
+.ProseNotes .ProseMirror::-webkit-scrollbar-thumb {
+    background-color: var(--alxgrn-color-scroll);
+    border-radius: var(--alxgrn-unit-small);
+    cursor: default;
+}
+
+.ProseNotes .ProseMirror::-webkit-scrollbar-corner {
+    background-color: transparent;
+}

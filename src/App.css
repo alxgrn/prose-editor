@@ -1,0 +1,41 @@
+#root {
+    position: relative;
+    max-width: 800px;
+    margin: var(--alxgrn-layout-header-height) auto;
+    padding: var(--alxgrn-unit-double);
+    background-color: var(--alxgrn-bg-panel);
+    border-radius: var(--alxgrn-unit-half);
+}
+
+.toolbar {
+    position: fixed;
+    z-index: 1000;
+    top: 0;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    background-color: var(--alxgrn-bg-main);
+    display: flex;
+    margin: var(--alxgrn-unit-half) auto;
+    justify-content: center;
+    gap: var(--alxgrn-unit);
+/*
+    height: var(--alxgrn-layout-header-height);
+    padding: var(--alxgrn-unit-half);
+*/
+}
+
+.toolbar.changed {
+    background-color: #fcc;
+}
+
+.toolbar div {
+    cursor: pointer;
+    padding: var(--alxgrn-unit-small) var(--alxgrn-unit);
+    border-radius: var(--alxgrn-unit-small);
+}
+
+.toolbar div:hover {
+    background-color: var(--alxgrn-bg-panel);
+}
+

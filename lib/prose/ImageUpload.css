@@ -1,0 +1,14 @@
+placeholder.ProseMirror-widget {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: var(--alxgrn-unit) auto;
+    border-radius: var(--alxgrn-unit-small);
+    width: 100%;
+    height: 200px;
+    background-color: var(--alxgrn-logo-color-beige);
+}
+
+placeholder.ProseMirror-widget::after {
+    content: "Загрузка...";
+}
