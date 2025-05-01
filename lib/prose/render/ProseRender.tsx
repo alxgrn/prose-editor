@@ -17,6 +17,7 @@ import CodeBlock from './CodeBlock';
 import HorizontalRule from './HorizontalRule';
 import Video from './Video';
 import HardBreak from './HardBreak';
+import Carousel from './Carousel';
 
 export type Node = {
     type: string;
@@ -68,6 +69,8 @@ const ProseRender: FC<Props> = ({ node, className }) => {
                 return <Paragraph node={node} />;
             case 'blockquote':
                 return <Blockquote node={node} />;
+            case 'carousel':
+                return <Carousel node={node}/>;
             case 'horizontal_rule':
                 return <HorizontalRule />;
             case 'hard_break':

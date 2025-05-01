@@ -9,7 +9,7 @@ import { sanitizeVideoURL } from "../../utils/link";
 import { ERROR_EMBED_DATA } from "../../config";
 
 
-const VideoView = forwardRef<HTMLTableElement, NodeViewComponentProps>(
+const VideoView = forwardRef<HTMLDivElement, NodeViewComponentProps>(
     function Video({ children, nodeProps, ...props }, outerRef) {
         const [ src, setSrc ] = useState('');
         const [ title, setTitle ] = useState(nodeProps.node.attrs.title ?? '');

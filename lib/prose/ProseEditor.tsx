@@ -10,8 +10,10 @@ import VideoView from "./views/VideoView";
 import ImageView from "./views/ImageView";
 import TableView from "./views/TableView";
 import TableCellView from "./views/TableCellView";
+import CarouselView from "./views/CarouselView";
 import { fixTables } from "prosemirror-tables";
 import { schema } from "./schema";
+import './ProseMirror.css';
 import './ProseViewer.css';
 
 type Props = {
@@ -67,6 +69,7 @@ const ProseEditor: FC<Props> = ({ content, onSave, onChange, onUpload }) => {
                     table: TableView,
                     table_header: TableCellView,
                     table_cell: TableCellView,
+                    carousel: CarouselView,
                 }}
             >
                 <MenuBar schema={schema} onSave={onSave} onUpload={onUpload}/>

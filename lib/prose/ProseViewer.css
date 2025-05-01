@@ -7,6 +7,7 @@
     color: red;
 }
 
+/* PARAGRAPH */
 .ProseNotes p:first-child,
 .ProseEditor p:first-child,
 .ProseViewer p:first-child {
@@ -19,6 +20,7 @@
     margin-bottom: 0;
 }
 
+/* LISTS */
 .ProseNotes ul,
 .ProseEditor ul,
 .ProseViewer ul,
@@ -43,6 +45,7 @@
     margin-left: var(--alxgrn-unit-double);
 }
 
+/* BLOCKQUOTE */
 .ProseNotes blockquote,
 .ProseEditor blockquote,
 .ProseViewer blockquote {
@@ -55,6 +58,7 @@
     background-color: var(--alxgrn-bg-accent);
 }
 
+/* WRAPPER ARROUND VIDEO AND IMAGE */
 .ProseNotes div.image,
 .ProseEditor div.image,
 .ProseViewer div.image,
@@ -64,14 +68,17 @@
     display: block;
     margin: var(--alxgrn-unit) auto;
     text-align: center;
+    position: relative;
 }
 
+/* IMAGE */
 .ProseNotes div.image img,
 .ProseEditor div.image img,
 .ProseViewer div.image img {
     display: block;
     border-radius: var(--alxgrn-unit-small);
     max-width: 100%;
+    max-height: 50vh;
     margin: 0 auto;
     background-color: var(--alxgrn-border);
 }
@@ -102,8 +109,57 @@
 
 .ProseViewer div.image:fullscreen img {
     border-radius: 0;
+    max-width: 100%;
+    max-height: 100%;
 }
 
+/* IMAGE BUTTONS */
+.ProseEditor div.image div.image-buttons {
+    position: absolute;
+    gap: var(--alxgrn-unit-small);
+    top: var(--alxgrn-unit-small);
+    right: var(--alxgrn-unit-small);
+    width: auto;
+    display: flex;
+    align-items: stretch;
+    justify-content: stretch;
+}
+
+.ProseEditor div.image div.image-buttons div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--alxgrn-color-light);
+    background-color: var(--alxgrn-bg-panel);
+    padding: var(--alxgrn-unit-small);
+    font-size: var(--alxgrn-font-size);
+    border-radius: var(--alxgrn-unit-small);
+    cursor: pointer;
+    font-style: normal;
+}
+
+.ProseEditor div.image div.image-buttons div:hover {
+    color: var(--alxgrn-color-accent);
+}
+
+.ProseNotes div.image div.image-buttons {
+    display: none;
+}
+
+/* CAROUSEL */
+.ProseEditor div.carousel,
+.ProseViewer div.carousel {
+    position: relative;
+    margin: var(--alxgrn-unit) 0;
+    border: 1px solid red;
+}
+
+.ProseEditor div.carousel div.image,
+.ProseViewer div.carousel div.image {
+    margin: 0;
+}
+
+/* VIDEO */
 .ProseNotes div.video iframe,
 .ProseEditor div.video iframe,
 .ProseViewer div.video iframe {
@@ -124,6 +180,7 @@
     margin: 0 auto;
 }
 
+/* TITLE EDITOR UNDER VIDEO AND IMAGE */
 .ProseNotes div.image > div,
 .ProseEditor div.image > div,
 .ProseNotes div.video > div,
@@ -133,6 +190,7 @@
     margin: 0 auto;
 }
 
+/* CODE BLOCK */
 .ProseNotes pre,
 .ProseEditor pre,
 .ProseViewer pre {
@@ -142,6 +200,7 @@
     padding: var(--alxgrn-unit-small) var(--alxgrn-unit-half);
 }
 
+/* HORIZONTAL RULE */
 .ProseViewer hr {
     display: block;
     border: none;

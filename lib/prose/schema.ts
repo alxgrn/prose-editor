@@ -110,37 +110,51 @@ const paragraph: NodeSpec = {
     }
 };
 
+// Карусель картинок
+const carousel: NodeSpec = {
+    content: 'image*',
+    group: 'block',
+    toDOM() {
+        return ['div', { class: 'carousel' }, 0];
+    }
+};
+
 // Добавим в базовые узлы таблицы
-const nodesWithTables = nodes.remove('paragraph').prepend({ paragraph }).append(tableNodes({
-    tableGroup: 'block',
-    cellContent: 'block+',
-    cellAttributes: {
-        halign: {
-            default: null,
-            getFromDOM(dom) {
-                const halign = dom.getAttribute('align') || null;
-                if (halign === 'left' || halign === 'right' || halign === 'center') return halign;
-                return null;
+const nodesWithTables = nodes
+    .remove('paragraph')
+    .prepend({ paragraph })
+    .append({ carousel })
+    .append(tableNodes({
+        tableGroup: 'block',
+        cellContent: 'block+',
+        cellAttributes: {
+            halign: {
+                default: null,
+                getFromDOM(dom) {
+                    const halign = dom.getAttribute('align') || null;
+                    if (halign === 'left' || halign === 'right' || halign === 'center') return halign;
+                    return null;
+                },
+                setDOMAttr(value, attrs) {
+                    if (value)
+                    attrs.style = (attrs.style || '') + `text-align: ${value};`;
+                },
             },
-            setDOMAttr(value, attrs) {
-                if (value)
-                attrs.style = (attrs.style || '') + `text-align: ${value};`;
-            },
-        },
-        valign: {
-            default: null,
-            getFromDOM(dom) {
-                const valign = dom.style.verticalAlign || null;
-                if (valign === 'top' || valign === 'bottom' || valign === 'middle') return valign;
-                return null;
-            },
-            setDOMAttr(value, attrs) {
-                if (value)
-                attrs.style = (attrs.style || '') + `vertical-align: ${value};`;
+            valign: {
+                default: null,
+                getFromDOM(dom) {
+                    const valign = dom.style.verticalAlign || null;
+                    if (valign === 'top' || valign === 'bottom' || valign === 'middle') return valign;
+                    return null;
+                },
+                setDOMAttr(value, attrs) {
+                    if (value)
+                    attrs.style = (attrs.style || '') + `vertical-align: ${value};`;
+                },
             },
         },
     },
-}));
+));
 
 // Сделаем схему с таблицами и списками
 export const schema = new Schema({
