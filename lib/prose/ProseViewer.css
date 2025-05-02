@@ -78,7 +78,7 @@
     display: block;
     border-radius: var(--alxgrn-unit-small);
     max-width: 100%;
-    max-height: 50vh;
+    max-height: 75vh;
     margin: 0 auto;
     background-color: var(--alxgrn-border);
 }
@@ -113,39 +113,6 @@
     max-height: 100%;
 }
 
-/* IMAGE BUTTONS */
-.ProseEditor div.image div.image-buttons {
-    position: absolute;
-    gap: var(--alxgrn-unit-small);
-    top: var(--alxgrn-unit-small);
-    right: var(--alxgrn-unit-small);
-    width: auto;
-    display: flex;
-    align-items: stretch;
-    justify-content: stretch;
-}
-
-.ProseEditor div.image div.image-buttons div {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--alxgrn-color-light);
-    background-color: var(--alxgrn-bg-panel);
-    padding: var(--alxgrn-unit-small);
-    font-size: var(--alxgrn-font-size);
-    border-radius: var(--alxgrn-unit-small);
-    cursor: pointer;
-    font-style: normal;
-}
-
-.ProseEditor div.image div.image-buttons div:hover {
-    color: var(--alxgrn-color-accent);
-}
-
-.ProseNotes div.image div.image-buttons {
-    display: none;
-}
-
 /* CAROUSEL */
 .ProseEditor div.carousel,
 .ProseViewer div.carousel {
@@ -157,6 +124,57 @@
 .ProseEditor div.carousel div.image,
 .ProseViewer div.carousel div.image {
     margin: 0;
+}
+
+/* IMAGE BUTTONS WRAPPER */
+.ProseEditor div.image div.image-buttons {
+    position: absolute;
+    gap: var(--alxgrn-unit-half);
+    top: 0;
+    right: 0;
+    width: auto;
+    margin: var(--alxgrn-unit-half);
+    display: flex;
+    align-items: stretch;
+    justify-content: stretch;
+}
+
+/* CAROUSEL BUTTONS WRAPPER */
+.ProseEditor div.carousel div.carousel-buttons {
+    z-index: 10;
+    position: absolute;
+    gap: var(--alxgrn-unit-half);
+    top: 0;
+    left: 0;
+    width: auto;
+    margin: var(--alxgrn-unit-half);
+    display: flex;
+    align-items: stretch;
+    justify-content: stretch;
+}
+
+/* IMAGE/CAROUSEL BUTTONS */
+.ProseEditor div.image div.image-buttons div,
+.ProseEditor div.carousel div.carousel-buttons div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--alxgrn-color-light);
+    background-color: var(--alxgrn-bg-main);
+    padding: var(--alxgrn-unit-small);
+    font-size: var(--alxgrn-font-size);
+    border-radius: var(--alxgrn-unit-small);
+    cursor: pointer;
+    font-style: normal;
+}
+
+.ProseEditor div.image div.image-buttons div:hover,
+.ProseEditor div.carousel div.carousel-buttons div:hover {
+    color: var(--alxgrn-color-accent);
+}
+
+.ProseNotes div.image div.image-buttons {
+    display: none;
 }
 
 /* VIDEO */

@@ -8,24 +8,23 @@ import WrapBlockMenu from './elements/WrapBlockMenu';
 import InsertBlocks from './elements/InsertBlocks';
 import BlockCommands from './elements/BlockCommands';
 import SaveButton from './elements/SaveButton';
-import { TEditorSaver, TImageUploader } from '../../types';
+import { TEditorSaver } from '../../types';
 import './MenuBar.css';
 import AlignMenu from './elements/AlignMenu';
 
 type Props = {
     schema: Schema;
     onSave: TEditorSaver;
-    onUpload: TImageUploader;
 };
 
-export const MenuBar: FC<Props> = ({ schema, onSave, onUpload }) => (
+export const MenuBar: FC<Props> = ({ schema, onSave }) => (
     <div className='MenuBar'>    
         <div className='MenuBlock'>
             <HeaderMenu schema={schema}/>
             <MakeBlockMenu schema={schema}/>
         </div>
         <InlineMarks schema={schema}/>
-        <InsertBlocks schema={schema} onUpload={onUpload}/>
+        <InsertBlocks schema={schema}/>
         <WrapBlockMenu schema={schema}/>
         <AlignMenu schema={schema}/>
         <BlockCommands/>

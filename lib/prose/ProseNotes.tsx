@@ -30,7 +30,7 @@ const ProseNotes: FC<Props> = ({ title = false, content, onSave, onCancel, onUpl
         const state = EditorState.create({
             doc: toSimpleSchema(content),
             schema: simpleSchema,
-            plugins: plugins(simpleSchema),
+            plugins: plugins({ schema: simpleSchema, upload: onUpload }),
         });
 
         setEditorState(state);
@@ -74,7 +74,7 @@ const ProseNotes: FC<Props> = ({ title = false, content, onSave, onCancel, onUpl
                     video: VideoView,
                 }}
             >
-                <SimpleMenuBar schema={simpleSchema} onUpload={onUpload}/>
+                <SimpleMenuBar schema={simpleSchema}/>
                 <ProseMirrorDoc />
 
                 {(onSave || onCancel) &&

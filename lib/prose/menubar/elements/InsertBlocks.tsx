@@ -10,14 +10,12 @@ import InsertImage from './InsertImage';
 import InsertVideo from './InsertVideo';
 import { TMenuItem } from '../MenuItem';
 import { isInTable } from 'prosemirror-tables';
-import { TImageUploader } from '../../../types';
 
 type Props = {
     schema: Schema;
-    onUpload?: TImageUploader;
 };
 
-export const InsertBlocks: FC<Props> = ({ schema, onUpload }) => {
+export const InsertBlocks: FC<Props> = ({ schema }) => {
     const [ items, setItems ] = useState<TMenuItem[]>([]);
     const [ isImagePrompt, setIsImagePrompt ] = useState(false);
     const [ isVideoPrompt, setIsVideoPrompt ] = useState(false);
@@ -74,7 +72,7 @@ export const InsertBlocks: FC<Props> = ({ schema, onUpload }) => {
 
     return (<>
         <MenuBlock items={items} />
-        <InsertImage isOpen={isImagePrompt} schema={schema} onClose={() => setIsImagePrompt(false)} onUpload={onUpload}/>
+        <InsertImage isOpen={isImagePrompt} onClose={() => setIsImagePrompt(false)} />
         <InsertVideo isOpen={isVideoPrompt} schema={schema} onClose={() => setIsVideoPrompt(false)} />
     </>);
 };

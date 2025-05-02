@@ -27,7 +27,7 @@ const ImageView = forwardRef<HTMLDivElement, NodeViewComponentProps>(
             setCanCarousel(true);
             for (let i = resolved.depth; i > 0; i --) {
                 const node = resolved.node(i);
-                console.log(node.type.name)
+                //console.log(node.type.name)
                 if (node.type.name === 'carousel') {
                     setCanCarousel(false);
                     break;

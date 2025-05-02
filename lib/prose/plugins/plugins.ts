@@ -9,11 +9,17 @@ import { dropCursor } from "prosemirror-dropcursor";
 import { gapCursor } from "prosemirror-gapcursor";
 import { Schema } from "prosemirror-model";
 import { buildKeymap, buildInputRules } from "prosemirror-example-setup";
-import { placeholderPlugin } from "./imageUpload";
+import { imageUploadPlugin } from "./imageUpload";
 import { goToNextCell, tableEditing } from "prosemirror-tables";
+import { TImageUploader } from "../../types";
 //import { selectPlugin } from "./plugins/select";
 
-export const plugins = (schema: Schema) => {
+type PluginsOptions = {
+    schema: Schema;
+    upload?: TImageUploader;
+};
+
+export const plugins = (options: PluginsOptions) => {
     let plugins = [
         //columnResizing({ lastColumnResizable: false, View: null }),
         tableEditing(),
@@ -21,13 +27,13 @@ export const plugins = (schema: Schema) => {
             Tab: goToNextCell(1),
             'Shift-Tab': goToNextCell(-1),
         }),
-        buildInputRules(schema),
-        keymap(buildKeymap(schema)),
+        buildInputRules(options.schema),
+        keymap(buildKeymap(options.schema)),
         keymap(baseKeymap),
         dropCursor({ color: '#F00', width: 2 }),
         gapCursor(),
         history(),
-        placeholderPlugin,
+        imageUploadPlugin(options),
         //selectPlugin,
     ];
 

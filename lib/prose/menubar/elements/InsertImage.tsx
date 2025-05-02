@@ -3,37 +3,38 @@
  */
 import { FC, useEffect, useState } from 'react';
 import { Form, Icons, Image, Input, Modal } from '@alxgrn/telefrag-ui';
-import { useEditorEventCallback } from '@handlewithcare/react-prosemirror';
-import { Schema } from 'prosemirror-model';
+import { useEditorEffect, useEditorEventCallback } from '@handlewithcare/react-prosemirror';
 import { TImageUploader } from '../../../types';
-import { startImageUpload } from '../../plugins/imageUpload';
+import { ImageUploadState, imageUploadPluginKey, insertImage, startImageUpload } from '../../plugins/imageUpload';
 
 export interface Props {
-    schema: Schema;
     isOpen: boolean;
     onClose: () => void;
-    onUpload?: TImageUploader;
 }
 
-const InsertImage: FC<Props> = ({ schema, isOpen, onClose, onUpload }) => {
+const InsertImage: FC<Props> = ({ isOpen, onClose }) => {
     const [ href, setHref ] = useState('');
     const [ image, setImage ] = useState<File|undefined>(undefined);
     const [ title, setTitle ] = useState('');
+    const [ onUpload, setOnUpload ] = useState<TImageUploader>();
 
     useEffect(() => {
         setTitle('');
         setImage(undefined);
     }, [ isOpen ]);
 
+    useEditorEffect((view) => {
+        if (!view || !isOpen) return;
+        const state = imageUploadPluginKey.getState(view.state) as ImageUploadState;
+        setOnUpload(state.upload);
+    }, [ isOpen ]);
+
     const onFormSubmit = useEditorEventCallback((view) => {
         if (!view || !image) return;
         if (onUpload) {
-            startImageUpload(view, image, schema, onUpload, title);
+            startImageUpload(view, image, title);
         } else {
-            const tr = view.state.tr;
-            if (!tr.selection.empty) tr.deleteSelection();
-            const pos = tr.selection.from;
-            view.dispatch(view.state.tr.replaceWith(pos, pos, schema.nodes.image.create({ src: href, title })));
+            insertImage(view, href, title);
         }
         view.focus();
         onClose();

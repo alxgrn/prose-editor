@@ -41,7 +41,7 @@ const ProseEditor: FC<Props> = ({ content, onSave, onChange, onUpload }) => {
         let state = EditorState.create({
             doc,
             schema: schema,
-            plugins: plugins(schema),
+            plugins: plugins({ schema, upload: onUpload }),
         });
 
         // Зачем фиксить таблицы пока не очень понятно, но в демке так сделано
@@ -72,7 +72,7 @@ const ProseEditor: FC<Props> = ({ content, onSave, onChange, onUpload }) => {
                     carousel: CarouselView,
                 }}
             >
-                <MenuBar schema={schema} onSave={onSave} onUpload={onUpload}/>
+                <MenuBar schema={schema} onSave={onSave}/>
                 <ProseMirrorDoc />
             </ProseMirror>
         </div>
