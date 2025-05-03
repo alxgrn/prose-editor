@@ -3,6 +3,7 @@
  */
 import { FC, useEffect, useState } from 'react';
 import ProseRender, { Node } from './render/ProseRender';
+import './Carousel.css';
 import './ProseViewer.css';
 
 type ProseViewerProps = {

@@ -4,8 +4,7 @@
 import { FC, useEffect, useState } from 'react';
 import { Form, Icons, Image, Input, Modal } from '@alxgrn/telefrag-ui';
 import { useEditorEffect, useEditorEventCallback } from '@handlewithcare/react-prosemirror';
-import { TImageUploader } from '../../../types';
-import { ImageUploadState, imageUploadPluginKey, insertImage, startImageUpload } from '../../plugins/imageUpload';
+import { ImagePluginState, ImagePluginKey, insertImage, uploadImage } from '../../plugins/imagePlugin';
 
 export interface Props {
     isOpen: boolean;
@@ -14,25 +13,26 @@ export interface Props {
 
 const InsertImage: FC<Props> = ({ isOpen, onClose }) => {
     const [ href, setHref ] = useState('');
-    const [ image, setImage ] = useState<File|undefined>(undefined);
+    const [ image, setImage ] = useState<File>();
     const [ title, setTitle ] = useState('');
-    const [ onUpload, setOnUpload ] = useState<TImageUploader>();
+    const [ canUpload, setCanUpload ] = useState(false);
 
     useEffect(() => {
+        setHref('');
         setTitle('');
         setImage(undefined);
     }, [ isOpen ]);
 
     useEditorEffect((view) => {
         if (!view || !isOpen) return;
-        const state = imageUploadPluginKey.getState(view.state) as ImageUploadState;
-        setOnUpload(state.upload);
+        const state = ImagePluginKey.getState(view.state) as ImagePluginState;
+        setCanUpload(state.upload !== undefined);
     }, [ isOpen ]);
 
     const onFormSubmit = useEditorEventCallback((view) => {
-        if (!view || !image) return;
-        if (onUpload) {
-            startImageUpload(view, image, title);
+        if (!view) return;
+        if (canUpload) {
+            uploadImage(view, image, title);
         } else {
             insertImage(view, href, title);
         }
@@ -49,7 +49,7 @@ const InsertImage: FC<Props> = ({ isOpen, onClose }) => {
 				onSubmit={onFormSubmit}
                 onCancel={onClose}
 			>
-                {onUpload
+                {canUpload
                 ? <Image
                     id='image'
                     value={image}

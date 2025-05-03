@@ -6,22 +6,22 @@ import { Schema } from "prosemirror-model";
 import { EditorState, Plugin, PluginKey } from "prosemirror-state"
 import { Decoration, DecorationSet, EditorView } from "prosemirror-view"
 import { TImageUploader } from "../../types";
-import './imageUpload.css';
+import './imagePlugin.css';
 
-export const imageUploadPluginKey = new PluginKey("imageUploadPluginKey");
+export const ImagePluginKey = new PluginKey("ImagePluginKey");
 
-export type ImageUploadOption = {
+export type ImagePluginOption = {
     schema: Schema;
     upload?: TImageUploader;
 };
 
-export type ImageUploadState = ImageUploadOption & {
+export type ImagePluginState = ImagePluginOption & {
     set: DecorationSet;
 };
 
-export const imageUploadPlugin = (options: ImageUploadOption): Plugin => {
-    const plugin = new Plugin<ImageUploadState>({
-        key: imageUploadPluginKey,
+export const imagePlugin = (options: ImagePluginOption): Plugin => {
+    const plugin = new Plugin<ImagePluginState>({
+        key: ImagePluginKey,
         state: {
             init() {
                 return {
@@ -34,7 +34,7 @@ export const imageUploadPlugin = (options: ImageUploadOption): Plugin => {
                 // Adjust decoration positions to changes made by the transaction
                 let set = state.set.map(tr.mapping, tr.doc);
                 // See if the transaction adds or removes any placeholders
-                const action = tr.getMeta(imageUploadPluginKey);
+                const action = tr.getMeta(ImagePluginKey);
                 if (action && action.add) {
                     const widget = document.createElement("placeholder");
                     const deco = Decoration.widget(action.add.pos, widget, { id: action.add.id, key: `imgphd${action.add.id}` });
@@ -57,7 +57,7 @@ export const imageUploadPlugin = (options: ImageUploadOption): Plugin => {
  * with the given ID, if it still exists.
  */
 const findPlaceholder = (state: EditorState, id: number) => {
-    const decos = (imageUploadPluginKey.getState(state) as ImageUploadState).set;
+    const decos = (ImagePluginKey.getState(state) as ImagePluginState).set;
     const found = decos?.find(undefined, undefined, spec => spec.id == id);
     return found?.length ? found[0].from : null;
 };
@@ -76,19 +76,21 @@ function uploadFile(file: File) {
     });
 };
 */
-
-export const startImageUpload = async (view: EditorView, file: File|null, title?: string) => {
+/**
+ * Загрузка изображения на сервер и вставка в текущую позицию курсора
+ */
+export const uploadImage = async (view: EditorView, file?: File|null, title?: string) => {
     if (!file) return;
     // Уникальный идентификатор для загрузки
     const id = Date.now();
     // Заменяем выделение плейсхолдером
     const tr = view.state.tr;
     if (!tr.selection.empty) tr.deleteSelection();
-    tr.setMeta(imageUploadPluginKey, { add: { id, pos: tr.selection.from }});
+    tr.setMeta(ImagePluginKey, { add: { id, pos: tr.selection.from }});
     view.dispatch(tr);
     // Вызываем функцию загрузки
     try {
-        const pluginState = imageUploadPluginKey.getState(view.state) as ImageUploadState;
+        const pluginState = ImagePluginKey.getState(view.state) as ImagePluginState;
         const schema = pluginState.schema;
         const upload = pluginState.upload;
         if (!upload) throw new Error('startImageUpload: Image upload function not defined');
@@ -107,20 +109,21 @@ export const startImageUpload = async (view: EditorView, file: File|null, title?
         // Otherwise, insert it at the placeholder's position, and remove the placeholder
         view.dispatch(view.state.tr
             .replaceWith(pos, pos, schema.nodes.image.create({ fid, title }))
-            .setMeta(imageUploadPluginKey, { remove: { id }}));
+            .setMeta(ImagePluginKey, { remove: { id }}));
     } catch (error) {
         // On failure, just clean up the placeholder
-        view.dispatch(view.state.tr.setMeta(imageUploadPluginKey, { remove: { id }}));
+        view.dispatch(view.state.tr.setMeta(ImagePluginKey, { remove: { id }}));
         console.error(`startImageUpload: ${error}`);
     }
 };
 /**
  * Вставка картинки по URL в текущую позицию курсора
  */
-export const insertImage = (view: EditorView, src: string, title?: string) => {
+export const insertImage = (view: EditorView, src?: string, title?: string) => {
+    if (!src) return;
     const tr = view.state.tr;
     if (!tr.selection.empty) tr.deleteSelection();
     const pos = tr.selection.from;
-    const schema = (imageUploadPluginKey.getState(view.state) as ImageUploadState).schema;
+    const schema = (ImagePluginKey.getState(view.state) as ImagePluginState).schema;
     view.dispatch(view.state.tr.replaceWith(pos, pos, schema.nodes.image.create({ src, title })));
 };

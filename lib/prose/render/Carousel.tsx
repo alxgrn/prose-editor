@@ -11,7 +11,9 @@ const Carousel: FC<Props> = ({ node }) => {
 
     return (
         <div className='carousel'>
-            {node.content.map((n, i) => <ProseRender node={n} key={i} />)}
+            <div className='carousel-list'>
+                {node.content.map((n, i) => <ProseRender node={n} key={i} />)}
+            </div>
         </div>
     );
 };

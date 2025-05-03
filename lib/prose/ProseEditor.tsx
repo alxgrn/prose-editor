@@ -13,6 +13,7 @@ import TableCellView from "./views/TableCellView";
 import CarouselView from "./views/CarouselView";
 import { fixTables } from "prosemirror-tables";
 import { schema } from "./schema";
+import './Carousel.css';
 import './ProseMirror.css';
 import './ProseViewer.css';
 

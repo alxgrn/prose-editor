@@ -9,7 +9,7 @@ import { dropCursor } from "prosemirror-dropcursor";
 import { gapCursor } from "prosemirror-gapcursor";
 import { Schema } from "prosemirror-model";
 import { buildKeymap, buildInputRules } from "prosemirror-example-setup";
-import { imageUploadPlugin } from "./imageUpload";
+import { imagePlugin } from "./imagePlugin";
 import { goToNextCell, tableEditing } from "prosemirror-tables";
 import { TImageUploader } from "../../types";
 //import { selectPlugin } from "./plugins/select";
@@ -33,7 +33,7 @@ export const plugins = (options: PluginsOptions) => {
         dropCursor({ color: '#F00', width: 2 }),
         gapCursor(),
         history(),
-        imageUploadPlugin(options),
+        imagePlugin(options),
         //selectPlugin,
     ];
 

@@ -113,19 +113,6 @@
     max-height: 100%;
 }
 
-/* CAROUSEL */
-.ProseEditor div.carousel,
-.ProseViewer div.carousel {
-    position: relative;
-    margin: var(--alxgrn-unit) 0;
-    border: 1px solid red;
-}
-
-.ProseEditor div.carousel div.image,
-.ProseViewer div.carousel div.image {
-    margin: 0;
-}
-
 /* IMAGE BUTTONS WRAPPER */
 .ProseEditor div.image div.image-buttons {
     position: absolute;
@@ -159,18 +146,25 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    color: var(--alxgrn-color-light);
-    background-color: var(--alxgrn-bg-main);
-    padding: var(--alxgrn-unit-small);
-    font-size: var(--alxgrn-font-size);
+    color: white;
+    background-color: var(--alxgrn-color-light);
     border-radius: var(--alxgrn-unit-small);
     cursor: pointer;
     font-style: normal;
+    font-weight: 600;
+    height: var(--alxgrn-unit-double);
+    min-width: var(--alxgrn-unit-double);
+    padding: 0 var(--alxgrn-unit-half);
+}
+
+.ProseEditor div.image div.image-buttons div:last-child,
+.ProseEditor div.carousel div.carousel-buttons div:last-child {
+    padding: 0;
 }
 
 .ProseEditor div.image div.image-buttons div:hover,
 .ProseEditor div.carousel div.carousel-buttons div:hover {
-    color: var(--alxgrn-color-accent);
+    background-color: var(--alxgrn-color-accent);
 }
 
 .ProseNotes div.image div.image-buttons {
