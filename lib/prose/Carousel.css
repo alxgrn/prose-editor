@@ -15,6 +15,12 @@ div.carousel {
               user-select: none; /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
 }
 
+div.carousel:fullscreen {
+    display: flex;
+    border-radius: 0;
+    background-color: black;
+}
+
 div.carousel div.carousel-full,
 div.carousel div.carousel-prev,
 div.carousel div.carousel-next {
@@ -63,11 +69,6 @@ div.carousel div.carousel-list {
     */
 }
 
-div.carousel:fullscreen div.carousel-list {
-    background-color: black;
-    border-radius: 0;
-}
-
 div.carousel div.carousel-list div.image {
     scroll-snap-align: start;
     flex: 0 0 auto;
@@ -75,9 +76,14 @@ div.carousel div.carousel-list div.image {
     margin: 0;
 }
 
-div.carousel:fullscreen div.carousel-list div.image {
-    aspect-ratio: unset;
-    height: 100vh;
+div.carousel:fullscreen div.carousel-list div.image::after {
+    display: none;
+}
+
+div.carousel:fullscreen div.carousel-list div.image img {
+    border-radius: 0;
+    max-width: 100%;
+    max-height: 100%;
 }
 
 div.carousel div.carousel-list::-webkit-scrollbar {
