@@ -81,7 +81,9 @@ const Carousel: FC<Props> = ({ node }) => {
             <div className='carousel-list' ref={listRef} onScroll={e => updatePrevNext(e.currentTarget)}>
                 {node.content.map((n, i) => <Image key={i} node={n} onClick={switchFullscreen}/>)}
             </div>
-            <div className='carousel-full' onClick={switchFullscreen}><Icons.Film/></div>
+            <div className='carousel-full' onClick={switchFullscreen}>
+                {isFullscreen ? <Icons.Shrink/> : <Icons.Expand/>}
+            </div>
             {canPrev && <div className='carousel-prev' onClick={e => scrollTo(e, -1)}><Icons.ChevronLeft/></div>}
             {canNext && <div className='carousel-next' onClick={e => scrollTo(e,  1)}><Icons.ChevronRight/></div>}
         </div>

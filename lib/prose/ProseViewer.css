@@ -141,6 +141,7 @@
 }
 
 /* IMAGE/CAROUSEL BUTTONS */
+.ProseViewer div.image div.image-full,
 .ProseEditor div.image div.image-buttons div,
 .ProseEditor div.carousel div.carousel-buttons div {
     display: flex;
@@ -153,6 +154,16 @@
     height: var(--alxgrn-unit-double);
     width: var(--alxgrn-unit-double);
     padding: 0;
+}
+
+.ProseViewer div.image div.image-full {
+    position: absolute;
+    top: var(--alxgrn-unit-half);
+    right: var(--alxgrn-unit-half);
+}
+
+.ProseViewer div.image div.image-full:hover {
+    background-color: var(--alxgrn-color-accent);
 }
 
 .ProseEditor div.image div.image-buttons div.text-button,

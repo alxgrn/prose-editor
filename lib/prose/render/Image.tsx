@@ -1,6 +1,7 @@
 import { FC, MouseEvent, useEffect, useRef, useState } from 'react';
 import { Node } from './ProseRender';
 import { API_URL, ERROR_IMAGE_DATA } from '../../config';
+import { Icons } from '@alxgrn/telefrag-ui';
 
 type Props = {
     node: Node;
@@ -41,14 +42,18 @@ const Image: FC<Props> = ({ node }) => {
         }
     };
 
+    if (!src) return null;
+
     return (
         <div
             ref={ref}
             title={title}
             className='image'
-            onClick={switchFullscreen}
         >
-            {src && <img src={src}/>}
+            <img src={src} onClick={switchFullscreen}/>
+            <div className='image-full' onClick={switchFullscreen}>
+                {isFullscreen ? <Icons.Shrink/> : <Icons.Expand/>}
+            </div>
         </div>
     );
 };
