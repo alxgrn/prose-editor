@@ -2,6 +2,10 @@ import { FC, useEffect, useRef, useState } from 'react';
 import { Node } from './ProseRender';
 import { API_URL, ERROR_IMAGE_DATA } from '../../config';
 import { Icons } from '@alxgrn/telefrag-ui';
+/**
+ * TODO: Разобраться со странным поведением обработки нажатия на кнопки вправо/влево:
+ *       После выхода из полноэкранного режима компонент продолжает их обрабатывать.
+ */
 
 type Props = {
     node: Node;
@@ -24,12 +28,10 @@ const Carousel: FC<Props> = ({ node }) => {
         //console.log(`pos=${pos} width=${width} full=${fullWidth}`);
     };
 
-    // Инициализация кнопок скролла
-    // TODO: Не работает! Нет реакции на изменение содержимого списка!
+    // Инициализация кнопки скролла вправо
     useEffect(() => {
-        if (!listRef.current) return;
-        updatePrevNext(listRef.current);
-    }, [ listRef ]);
+        setCanNext(Array.isArray(node.content) && node.content.length > 1);
+    }, [ node ]);
 
     // Переключаем флаг перехода в полный экран
     useEffect(() => {
@@ -42,11 +44,13 @@ const Carousel: FC<Props> = ({ node }) => {
 
     // Ловим нажатия на кнопки вправо/влево
     useEffect(() => {
+        if (!isFullscreen) return;
+
         const onKeydown = (e: KeyboardEvent) => {
             if(e.key === 'ArrowLeft') scrollTo(null, -1);
             if(e.key === 'ArrowRight') scrollTo(null, 1);
         };
-        if (!isFullscreen) return;
+    
         document.body.addEventListener('keydown', onKeydown);
         return () => document.body.removeEventListener('keydown', onKeydown);
     }, [ isFullscreen ]);
