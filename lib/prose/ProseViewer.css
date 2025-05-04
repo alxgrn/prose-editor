@@ -150,16 +150,18 @@
     background-color: var(--alxgrn-color-light);
     border-radius: var(--alxgrn-unit-small);
     cursor: pointer;
-    font-style: normal;
-    font-weight: 600;
     height: var(--alxgrn-unit-double);
-    min-width: var(--alxgrn-unit-double);
-    padding: 0 var(--alxgrn-unit-half);
+    width: var(--alxgrn-unit-double);
+    padding: 0;
 }
 
-.ProseEditor div.image div.image-buttons div:last-child,
-.ProseEditor div.carousel div.carousel-buttons div:last-child {
-    padding: 0;
+.ProseEditor div.image div.image-buttons div.text-button,
+.ProseEditor div.carousel div.carousel-buttons div.text-button {
+    width: unset;
+    padding: 0 var(--alxgrn-unit-half);
+    font-style: normal;
+    font-weight: 600;
+    font-size: var(--alxgrn-font-size-small)
 }
 
 .ProseEditor div.image div.image-buttons div:hover,

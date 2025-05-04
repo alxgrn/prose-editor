@@ -15,6 +15,15 @@ const CarouselView = forwardRef<HTMLDivElement, NodeViewComponentProps>(
         const [ canPrev, setCanPrev ] = useState(false);
         const [ canNext, setCanNext ] = useState(false);
 
+        // Обновляет видимость кнопок сролла
+        const updatePrevNext = (target: HTMLDivElement) => {
+            const pos  = target.scrollLeft;
+            const width = target.clientWidth;
+            const fullWidth = target.scrollWidth;
+            setCanPrev(pos > 0);
+            setCanNext(fullWidth - pos > width);
+        };
+
         // Не уверен что тут это необходимо, т.к. в ImageView оно уже есть
         useStopEvent(() => {
             return true;
@@ -23,7 +32,10 @@ const CarouselView = forwardRef<HTMLDivElement, NodeViewComponentProps>(
         // Нужно ли показывать кнопки скролла
         useEffect(() => {
             setCanScroll(nodeProps.node.childCount > 1);
-        }, [ nodeProps ]);
+            if (listRef.current && nodeProps.node.childCount > 1) {
+                updatePrevNext(listRef.current);
+            }
+        }, [ nodeProps, listRef ]);
 
         // Удаляет карусель
         const onDelete = useEditorEventCallback((view) => {
@@ -45,11 +57,7 @@ const CarouselView = forwardRef<HTMLDivElement, NodeViewComponentProps>(
 
         // Отслеживаем событие скролла для определения видимости кнопок листания
         const onScroll = (event: React.UIEvent<HTMLDivElement>) => {
-            const pos  = event.currentTarget.scrollLeft;
-            const width = event.currentTarget.clientWidth;
-            const fullWidth = event.currentTarget.scrollWidth;
-            setCanPrev(pos > 0);
-            setCanNext(fullWidth - pos > width);
+            updatePrevNext(event.currentTarget);
         };
 
         // Скролл на один кадр вперед или назад
@@ -67,7 +75,7 @@ const CarouselView = forwardRef<HTMLDivElement, NodeViewComponentProps>(
                     {children}
                 </div>
                 <div className='carousel-buttons'>
-                    <div onClick={onDelete}><small>Удалить карусель</small></div>
+                    <div onClick={onDelete} className='text-button'>Удалить карусель</div>
                     <div onClick={onInsert}><Icons.Image/></div>
                 </div>
                 {canScroll && <>
