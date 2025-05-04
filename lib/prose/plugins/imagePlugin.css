@@ -12,3 +12,18 @@ placeholder.ProseMirror-widget {
 placeholder.ProseMirror-widget::after {
     content: "Загрузка...";
 }
+
+/* ВИджет обрамляется в span который мы оформляем как враппер вокруг картинки */
+div.carousel div.carousel-list span {
+    display: block;
+    scroll-snap-align: start;
+    flex: 0 0 auto;
+    width: 100%;
+    margin: 0;
+}
+
+div.carousel placeholder.ProseMirror-widget {
+    height: unset;
+    aspect-ratio: 16 / 9;
+    margin: 0;
+}

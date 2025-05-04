@@ -2,7 +2,7 @@
  * Карусель с картинками
  */
 import { Icons } from "@alxgrn/telefrag-ui";
-import { NodeViewComponentProps, useEditorEventCallback } from "@handlewithcare/react-prosemirror";
+import { NodeViewComponentProps, useEditorEventCallback, useStopEvent } from "@handlewithcare/react-prosemirror";
 import { forwardRef, useEffect, useRef, useState } from "react";
 import InsertImage from "../menubar/elements/InsertImage";
 import { TextSelection } from "prosemirror-state";
@@ -14,6 +14,11 @@ const CarouselView = forwardRef<HTMLDivElement, NodeViewComponentProps>(
         const [ canScroll, setCanScroll ] = useState(false);
         const [ canPrev, setCanPrev ] = useState(false);
         const [ canNext, setCanNext ] = useState(false);
+
+        // Не уверен что тут это необходимо, т.к. в ImageView оно уже есть
+        useStopEvent(() => {
+            return true;
+        });
 
         // Нужно ли показывать кнопки скролла
         useEffect(() => {
@@ -38,7 +43,7 @@ const CarouselView = forwardRef<HTMLDivElement, NodeViewComponentProps>(
             setIsImagePrompt(true);
         });
 
-        // Отслеживаем событие скролла для определения видимости кнопок
+        // Отслеживаем событие скролла для определения видимости кнопок листания
         const onScroll = (event: React.UIEvent<HTMLDivElement>) => {
             const pos  = event.currentTarget.scrollLeft;
             const width = event.currentTarget.clientWidth;

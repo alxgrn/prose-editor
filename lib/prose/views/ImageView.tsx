@@ -23,39 +23,18 @@ const ImageView = forwardRef<HTMLDivElement, NodeViewComponentProps>(
             setCanCarousel(false);
             if (!view || !view.state.schema.nodes.carousel) return;
             const pos = nodeProps.getPos();
-            const resolved = view.state.doc.resolve(pos);
-            setCanCarousel(true);
-            for (let i = resolved.depth; i > 0; i --) {
-                const node = resolved.node(i);
-                //console.log(node.type.name)
-                if (node.type.name === 'carousel') {
-                    setCanCarousel(false);
-                    break;
-                }
-            }
+            const parent = view.state.doc.resolve(pos).parent;
+            setCanCarousel(parent.type.name !== 'carousel');
+            parent.childCount
         });
 
         // Изменение подписи
         const onTitleChange = useEditorEventCallback((view, title: string) => {
             if (!view) return;
             setTitle(title);
-            // Используем механизм обхода всех нод в выделении
-            // также как в присвоении выравнивания в текстовых блоках.
-            // Но наверняка есть более правильный способ т.к. у нас в
-            // выделении должна быть только одна нода с картинкой.
-            const { $from, $to } = view.state.selection;
-            const nodeRange = $from.blockRange($to);
-            if (nodeRange) {
-                const parent = view.state.doc;
-                //console.log(`start=${nodeRange.start}, end=${nodeRange.end}`)
-                let tr = view.state.tr;
-                parent.nodesBetween(nodeRange.start, nodeRange.end, (node, pos) => {
-                    if (node.type.name === 'image') {
-                        tr = tr.setNodeMarkup(pos, null, { ...nodeProps.node.attrs, title });
-                    }
-                });
-                view.dispatch(tr);
-            }
+            const tr = view.state.tr;
+            const pos = nodeProps.getPos();
+            view.dispatch(tr.setNodeMarkup(pos, null, { ...nodeProps.node.attrs, title }));
             view.focus();
         });
 
@@ -75,7 +54,15 @@ const ImageView = forwardRef<HTMLDivElement, NodeViewComponentProps>(
             if (!view) return;
             const pos = nodeProps.getPos();
             const size = nodeProps.node.nodeSize;
-            view.dispatch(view.state.tr.delete(pos, pos + size));
+            const parent = view.state.doc.resolve(pos).parent;
+            const tr = view.state.tr;
+            if (parent.type.name === 'carousel' && parent.childCount === 1) {
+                // Если это была единственная картинка в карусели, то удаляем пустую карусель
+                view.dispatch(tr.delete(pos - 1, pos - 1 + parent.nodeSize));
+            } else {
+                // Иначе просто удаляем саму картинку
+                view.dispatch(tr.delete(pos, pos + size));
+            }
         });
 
         return (
