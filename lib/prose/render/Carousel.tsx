@@ -17,20 +17,24 @@ const Carousel: FC<Props> = ({ node }) => {
     const [ isFullscreen, setIsFullscreen ] = useState(false);
     const [ canPrev, setCanPrev ] = useState(false);
     const [ canNext, setCanNext ] = useState(false);
+    const [ current, setCurrent ] = useState(1);
+    const [ total, setTotal ] = useState(1);
 
-    // Обновляет видимость кнопок сролла
+    // Обновляет видимость кнопок сролла и текущей позиции
     const updatePrevNext = (target: HTMLDivElement) => {
         const pos  = target.scrollLeft;
         const width = target.clientWidth;
         const fullWidth = target.scrollWidth;
-        setCanPrev(pos > 0);
-        setCanNext(fullWidth - pos > width);
-        //console.log(`pos=${pos} width=${width} full=${fullWidth}`);
+        setCanPrev(pos > width/2);
+        setCanNext(pos < fullWidth - width * 1.5);
+        setCurrent(Math.round(pos/width + 1));
     };
 
     // Инициализация кнопки скролла вправо
     useEffect(() => {
         setCanNext(Array.isArray(node.content) && node.content.length > 1);
+        setTotal(node.content?.length ?? 1);
+        setCurrent(1);
     }, [ node ]);
 
     // Переключаем флаг перехода в полный экран
@@ -81,6 +85,7 @@ const Carousel: FC<Props> = ({ node }) => {
             <div className='carousel-list' ref={listRef} onScroll={e => updatePrevNext(e.currentTarget)}>
                 {node.content.map((n, i) => <Image key={i} node={n} onClick={switchFullscreen}/>)}
             </div>
+            <div className='carousel-numb'>{current} / {total}</div>
             <div className='carousel-full' onClick={switchFullscreen}>
                 {isFullscreen ? <Icons.Shrink/> : <Icons.Expand/>}
             </div>

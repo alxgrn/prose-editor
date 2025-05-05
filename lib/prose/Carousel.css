@@ -21,6 +21,7 @@ div.carousel:fullscreen {
     background-color: black;
 }
 
+div.carousel div.carousel-numb,
 div.carousel div.carousel-full,
 div.carousel div.carousel-prev,
 div.carousel div.carousel-next {
@@ -44,12 +45,22 @@ div.carousel div.carousel-next {
     right: var(--alxgrn-unit-half);
 }
 
+div.carousel div.carousel-numb {
+    top: var(--alxgrn-unit-half);
+    font-size: var(--alxgrn-font-size-small);
+    font-weight: 600;
+    font-style: normal;
+    padding: 0 var(--alxgrn-unit-half);
+    width: unset;
+}
+
 div.carousel div.carousel-full {
     top: var(--alxgrn-unit-half);
     left: unset;
     right: var(--alxgrn-unit-half);
 }
 
+div.carousel:hover div.carousel-numb:hover,
 div.carousel:hover div.carousel-full:hover,
 div.carousel:hover div.carousel-prev:hover,
 div.carousel:hover div.carousel-next:hover {

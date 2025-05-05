@@ -17,11 +17,12 @@ const CarouselView = forwardRef<HTMLDivElement, NodeViewComponentProps>(
 
         // Обновляет видимость кнопок сролла
         const updatePrevNext = (target: HTMLDivElement) => {
-            const pos  = target.scrollLeft;
+            const pos = target.scrollLeft;
             const width = target.clientWidth;
             const fullWidth = target.scrollWidth;
             setCanPrev(pos > 0);
-            setCanNext(fullWidth - pos > width);
+            setCanNext(pos < fullWidth - width * 1.5);
+            //console.log(`pos=${pos} width=${width} fullWidth=${fullWidth}`);
         };
 
         // Не уверен что тут это необходимо, т.к. в ImageView оно уже есть
@@ -76,7 +77,7 @@ const CarouselView = forwardRef<HTMLDivElement, NodeViewComponentProps>(
                 </div>
                 <div className='carousel-buttons'>
                     <div onClick={onDelete} className='text-button'>Удалить карусель</div>
-                    <div onClick={onInsert}><Icons.Image/></div>
+                    <div onClick={onInsert}><Icons.Plus/></div>
                 </div>
                 {canScroll && <>
                     {canPrev && <div className='carousel-prev' onClick={e => scrollTo(e, -1)}><Icons.ChevronLeft/></div>}

@@ -112,6 +112,7 @@ const paragraph: NodeSpec = {
 
 // Карусель картинок
 const carousel: NodeSpec = {
+    atom: true,
     content: 'image*',
     group: 'block',
     toDOM() {
