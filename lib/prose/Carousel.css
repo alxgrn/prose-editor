@@ -3,7 +3,7 @@ div.carousel {
     position: relative;
     text-align: center;
     margin: var(--alxgrn-unit) 0;
-    background-color: var(--alxgrn-bg-main);
+    /* background-color: var(--alxgrn-bg-main); */
     border-radius: var(--alxgrn-unit-small);
     overflow: hidden;
     /* Запрет выделения */

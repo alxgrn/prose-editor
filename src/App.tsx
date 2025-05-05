@@ -3,12 +3,27 @@ import { content as initialContent } from './content';
 import { Editor, Notes, Viewer } from '../lib';
 import ModeSelector from './ModeSelector';
 import { getImageIdsFromProse } from '../lib/utils/utils';
-import './App.css'
+import './App.css';
 
 const App = () => {
     const [ content, setContent ] = useState(initialContent);
     const [ isChanged, setIsChanged ] = useState(false);
     const [ mode, setMode ] = useState<string>('editor');
+
+    // Имитируем загрузку картинки на сервер
+    const onUpload = () => {
+        return new Promise<string|number>(function(resolve) {
+            const ids = [3070, 3065, 3064, 3060, 3057, 3054, 3042, 3023, 2986, 2963, 2942];
+            const id = ids[Math.round(Math.random() * (ids.length - 1))];
+            if (Math.random() > 0.3) {
+                // Нормальная загрузка
+                setTimeout(() => resolve(id), 1000);
+            } else {
+                // Имитация ошибки
+                setTimeout(() => resolve('onUpload: Имитация ошибки при загрузке картинки'), 1000);
+            }
+        })
+    };
 
     const onChange = (newMode: string) => {
         setMode(newMode);
@@ -24,9 +39,7 @@ const App = () => {
         <Notes
             content={content}
             onCancel={() => setMode('viewer')}
-            onUpload={() => new Promise(function(resolve) {
-                setTimeout(() => resolve(1410), 1000);
-            })}
+            onUpload={onUpload}
             onSave={(data) => {
                 setContent(data.content);
                 setMode('viewer')
@@ -54,11 +67,7 @@ const App = () => {
                     // Имитируем успешное завершение сохранения на сервер
                     setTimeout(() => resolve(undefined), 1000);
             })}
-            onUpload={() => new Promise(function(resolve) {
-                // Имитируем загрузку картинки на сервер и возврат ее идентификатора
-                setTimeout(() => resolve(413), 1000);
-                // setTimeout(() => resolve('Error'), 1000);
-            })}
+            onUpload={onUpload}
         />
     </>);
 
@@ -66,6 +75,6 @@ const App = () => {
         <ModeSelector onChange={onChange}/>
         <div>Выберите режим</div>
     </>);
-}
+};
 
-export default App
+export default App;

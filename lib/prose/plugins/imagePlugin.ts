@@ -93,7 +93,7 @@ export const uploadImage = async (view: EditorView, file?: File|null, title?: st
         const pluginState = ImagePluginKey.getState(view.state) as ImagePluginState;
         const schema = pluginState.schema;
         const upload = pluginState.upload;
-        if (!upload) throw new Error('startImageUpload: Image upload function not defined');
+        if (!upload) throw new Error('uploadImage: Image upload function not defined');
         const fid = await upload(file);
         // Если функция загрузки вернула строку, значит это сообщение об ошибке
         if (typeof fid === 'string') throw new Error(fid);
@@ -103,7 +103,7 @@ export const uploadImage = async (view: EditorView, file?: File|null, title?: st
         const pos = findPlaceholder(view.state, id);
         // If the content around the placeholder has been deleted, drop the image
         if (pos === null) {
-            console.warn('startImageUpload: The image was removed from the document during upload')
+            console.warn('uploadImage: The image was removed from the document during upload')
             return;
         }
         // Otherwise, insert it at the placeholder's position, and remove the placeholder
@@ -113,7 +113,7 @@ export const uploadImage = async (view: EditorView, file?: File|null, title?: st
     } catch (error) {
         // On failure, just clean up the placeholder
         view.dispatch(view.state.tr.setMeta(ImagePluginKey, { remove: { id }}));
-        console.error(`startImageUpload: ${error}`);
+        console.error(`uploadImage: ${error}`);
     }
 };
 /**

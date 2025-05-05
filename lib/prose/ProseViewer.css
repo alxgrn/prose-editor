@@ -80,7 +80,6 @@
     max-width: 100%;
     max-height: 75vh;
     margin: 0 auto;
-    background-color: var(--alxgrn-border);
 }
 
 .ProseViewer div.image::after {
@@ -226,7 +225,8 @@
 }
 
 /* HORIZONTAL RULE */
-.ProseViewer hr {
+.ProseViewer hr,
+.ProseEditor hr {
     display: block;
     border: none;
     border-top: 1px solid var(--alxgrn-border);

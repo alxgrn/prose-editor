@@ -14,7 +14,7 @@ export type TPublication = {
  * Функция обновления содержимого статьи в большом редакторе
  * Возвращает undefined или сообщение об ошибке
  */
-export type TEditorSaver = (data: TPublication) => Promise<string | undefined>;
+export type TEditorSaver = (data: TPublication) => Promise<string|undefined>;
 /**
  * Функция обновления содержимого статьи в кратком редакторе
  */
@@ -24,9 +24,4 @@ export type TNotesSaver = (data: TPublication) => void;
  * Редактор дергает эту функцию, когда надо вставить картинку с диска
  * Возвращает идентификатор созданного файла картинки или сообщение об ошибке
  */
-export type TImageUploader = (image: File) => Promise<number | string>;
-/**
- * Функции создания и обновления публикации
- */
-export type TCreatePublication = (data: TPublication) => void;
-export type TUpdatePublication = (data: TPublication, publication_id: number) => void;
+export type TImageUploader = (image: File) => Promise<number|string>;

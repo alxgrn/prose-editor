@@ -7,6 +7,9 @@ placeholder.ProseMirror-widget {
     width: 100%;
     height: 200px;
     background-color: var(--alxgrn-logo-color-beige);
+    font-style: normal;
+    font-weight: normal;
+    font-size: var(--alxgrn-font-size);
 }
 
 placeholder.ProseMirror-widget::after {

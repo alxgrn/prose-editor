@@ -11,21 +11,17 @@ export {
 };
 
 import {
-    TCreatePublication,
     TEditorSaver,
     TImageUploader,
     TNotesSaver,
     TPublication,
     TPublicationFormat,
-    TUpdatePublication,
 } from "./types";
 
 export type {
-    TCreatePublication,
     TEditorSaver,
     TImageUploader,
     TNotesSaver,
     TPublication,
     TPublicationFormat,
-    TUpdatePublication,
 };
