@@ -1,16 +1,17 @@
 import { FC, useEffect, useState } from "react";
 import { EditorState } from "prosemirror-state";
+import { undoDepth } from 'prosemirror-history';
 import { plugins } from "./plugins";
 import { ProseMirror, ProseMirrorDoc } from "@handlewithcare/react-prosemirror";
 import { TImageUploader, TNotesSaver, TPublication } from "../types";
 import { simpleSchema, toSimpleSchema } from "./schema";
 import SimpleMenuBar from "./menubar/SimpleMenuBar";
-import SaveButton from "./menubar/elements/SaveButton";
 import ImageView from "./views/ImageView";
 import VideoView from "./views/VideoView";
 import './ProseMirror.css';
 import './ProseViewer.css';
 import './ProseNotes.css';
+import SaveButton from "./menubar/elements/SaveButton";
 
 type Props = {
     title?: boolean | string | null; // нужно ли выводить поле ввода для заголовка публикации и его начальное содержимое
@@ -18,10 +19,11 @@ type Props = {
     placeholder?: string; // подсказка в пустом редакторе
     onSave?: TNotesSaver; // нажатие на кнопку сохранения
     onCancel?: () => void; // нажатие на кнопку отмены редактирования
+    onChange?: (changed: boolean) => void; // вызывается при изменении текста
     onUpload?: TImageUploader; // вызывается после выбора картинки для загрузки на сервер
 };
 
-const ProseNotes: FC<Props> = ({ title = false, content, onSave, onCancel, onUpload }) => {
+const ProseNotes: FC<Props> = ({ title = false, content, onSave, onCancel, onChange, onUpload }) => {
     const [ name, setName ] = useState('');
     const [ editorState, setEditorState ] = useState<EditorState>();
 
@@ -34,9 +36,12 @@ const ProseNotes: FC<Props> = ({ title = false, content, onSave, onCancel, onUpl
         });
 
         setEditorState(state);
-    }, [ content ]);
+        if (title !== false) setName(typeof title === 'string' ? title : '');
+    }, [ title, content ]);
 
-    // Проверка того что требуемые данные введены
+    // Проверка того что требуемые данные введены.
+    // По факту проверяет только то, что если нужен заголовок, то он введен.
+    // Остальные проверки на совести кнопки сохранения.
     const canSave = () => {
         return title !== false ? name.trim().length > 0 : true;
     };
@@ -44,7 +49,7 @@ const ProseNotes: FC<Props> = ({ title = false, content, onSave, onCancel, onUpl
     // Обработка клика по кнопке сохранения
     const onBeforeSave = (data: TPublication) => {
         if(!onSave || !canSave()) return;
-        onSave(data);
+        onSave({ ...data, name });
     };
 
     // Отмена
@@ -63,24 +68,26 @@ const ProseNotes: FC<Props> = ({ title = false, content, onSave, onCancel, onUpl
                 value={name}
                 placeholder='Укажите заголовок'
             />}
-
             <ProseMirror
                 state={editorState}
-                dispatchTransaction={(tr) => {
-                    setEditorState((s) => s?.apply(tr));
-                }}
+                dispatchTransaction={(tr) => setEditorState((s) => {
+                    const state = s?.apply(tr);
+                    if (state && onChange) onChange(!!undoDepth(state));
+                    return state;
+                })}
                 nodeViews={{
                     image: ImageView,
                     video: VideoView,
                 }}
             >
-                <SimpleMenuBar schema={simpleSchema}/>
-                <ProseMirrorDoc />
-
+                <div className='ProseNotesContent'>
+                    <SimpleMenuBar schema={simpleSchema}/>
+                    <ProseMirrorDoc />
+                </div>
                 {(onSave || onCancel) &&
                 <div className='ProseNotesButtons'>
                     {onCancel && <span className='a small' onClick={onBeforeCancel}>Отменить</span>}
-                    {onSave && <SaveButton onSave={onBeforeSave} disabled={!canSave()} />}
+                    {onSave && <SaveButton onSave={onBeforeSave} disabled={!canSave()} wasChanged={false} />}
                 </div>}
             </ProseMirror>
         </div>

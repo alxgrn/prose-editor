@@ -21,8 +21,8 @@ type Props = {
     content: string | null; // Содержимое статьи
     //onView: () => void; // Вызывается при клике на кнопку просмотра статьи
     onSave: TEditorSaver; // Вызывается при нажатии на кнопку сохранения статьи
-    onChange: (changed: boolean) => void; // Вызывается при изменении текста статьи
-    onUpload: TImageUploader; // Вызывается после выбора картинки для загрузки на сервер
+    onChange?: (changed: boolean) => void; // Вызывается при изменении текста статьи
+    onUpload?: TImageUploader; // Вызывается после выбора картинки для загрузки на сервер
 };
 
 const ProseEditor: FC<Props> = ({ content, onSave, onChange, onUpload }) => {
@@ -61,7 +61,7 @@ const ProseEditor: FC<Props> = ({ content, onSave, onChange, onUpload }) => {
                 state={editorState}
                 dispatchTransaction={(tr) => setEditorState((s) => {
                     const state = s?.apply(tr);
-                    if (state) onChange(undoDepth(state) > 0);
+                    if (state && onChange) onChange(!!undoDepth(state));
                     return state;
                 })}
                 nodeViews={{

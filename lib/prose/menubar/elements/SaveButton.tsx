@@ -1,3 +1,7 @@
+/**
+ * Кнопка вызова сохранения документа.
+ * Становится активной если изменилось содержимое редактора.
+ */
 import { useEditorEffect, useEditorEventCallback } from "@handlewithcare/react-prosemirror";
 import { FC, useState } from "react";
 import { undoDepth } from 'prosemirror-history';
@@ -7,14 +11,29 @@ import { fixTables } from "prosemirror-tables";
 
 type Props = {
     onSave: TEditorSaver|TNotesSaver;
-    disabled?: boolean;
+    disabled?: boolean; // принудительно задизейблена
+    notEmpty?: boolean; // содержимое редактора не должно быть пустым
+    wasChanged?: boolean; // содержимое редактора должно быть изменено
 };
 
-const SaveButton: FC<Props> = ({ onSave, disabled = false }) => {
+const SaveButton: FC<Props> = ({ onSave, disabled = false, notEmpty = true, wasChanged = true }) => {
     const [ enabled, setEnabled ] = useState(true);
 
     useEditorEffect((view) => {
-        setEnabled(undoDepth(view.state));
+        let enabled = false;
+        const node = view.state.doc;
+        const size = !!node.textBetween(0, node.content.size, undefined, ' ').length;
+        const undo = !!undoDepth(view.state);
+
+        if (wasChanged && notEmpty) {
+            enabled = size && undo;
+        } else if (wasChanged) {
+            enabled = undo;
+        } else if (notEmpty) {
+            enabled = size;
+        }
+
+        setEnabled(enabled);
     });
 
     const onClick = useEditorEventCallback((view) => {

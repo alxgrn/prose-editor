@@ -15,13 +15,10 @@ const App = () => {
         return new Promise<string|number>(function(resolve) {
             const ids = [3070, 3065, 3064, 3060, 3057, 3054, 3042, 3023, 2986, 2963, 2942];
             const id = ids[Math.round(Math.random() * (ids.length - 1))];
-            if (Math.random() > 0.3) {
-                // Нормальная загрузка
-                setTimeout(() => resolve(id), 1000);
-            } else {
-                // Имитация ошибки
-                setTimeout(() => resolve('onUpload: Имитация ошибки при загрузке картинки'), 1000);
-            }
+            // Нормальная загрузка
+            setTimeout(() => resolve(id), 1000);
+            // Имитация ошибки
+            // setTimeout(() => resolve('onUpload: Имитация ошибки при загрузке картинки'), 1000);
         })
     };
 
@@ -37,8 +34,10 @@ const App = () => {
     if (mode === 'notes') return (<>
         <ModeSelector onChange={onChange} changed={isChanged}/>
         <Notes
+            title={true}
             content={content}
             onCancel={() => setMode('viewer')}
+            onChange={(b) => setIsChanged(b)}
             onUpload={onUpload}
             onSave={(data) => {
                 setContent(data.content);

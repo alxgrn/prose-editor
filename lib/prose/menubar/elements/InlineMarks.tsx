@@ -27,7 +27,7 @@ export const InlineMarks: FC<Props> = ({ schema }) => {
             inline.push({
                 icon: <Icons.Bold/>,
                 command: toggleMark(mark),
-                isActive: (s) => markActive(s, mark as MarkType),
+                isActive: (s) => markActive(s, mark),
             });
         }
 
@@ -36,7 +36,7 @@ export const InlineMarks: FC<Props> = ({ schema }) => {
             inline.push({
                 icon: <Icons.Italic/>,
                 command: toggleMark(mark),
-                isActive: (s) => markActive(s, mark as MarkType),
+                isActive: (s) => markActive(s, mark),
             });
         }
 
@@ -45,7 +45,7 @@ export const InlineMarks: FC<Props> = ({ schema }) => {
             inline.push({
                 icon: <Icons.Underline/>,
                 command: toggleMark(mark),
-                isActive: (s) => markActive(s, mark as MarkType),
+                isActive: (s) => markActive(s, mark),
             });
         }
 
@@ -54,7 +54,7 @@ export const InlineMarks: FC<Props> = ({ schema }) => {
             inline.push({
                 icon: <Icons.Strikethrough/>,
                 command: toggleMark(mark),
-                isActive: (s) => markActive(s, mark as MarkType),
+                isActive: (s) => markActive(s, mark),
             });
         }
 
@@ -63,7 +63,7 @@ export const InlineMarks: FC<Props> = ({ schema }) => {
             inline.push({
                 icon: <Icons.Code/>,
                 command: toggleMark(mark),
-                isActive: (s) => markActive(s, mark as MarkType),
+                isActive: (s) => markActive(s, mark),
             });
         }        
         
@@ -72,7 +72,10 @@ export const InlineMarks: FC<Props> = ({ schema }) => {
             inline.push({
                 icon: <Icons.Link/>,
                 isActive: (state) => markActive(state, mark),
-                isDisabled: (state) => { return state.selection.empty },
+                isDisabled: (state) => { 
+                    if (state.selection.empty) return true;
+                    return !toggleMark(mark)(state);
+                },
                 command: (state, dispatch, view) => {
                     if (markActive(state, mark)) {
                         toggleMark(mark)(state, dispatch);

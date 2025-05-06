@@ -37,7 +37,7 @@ const MenuItem: FC<Props> = ({ ref, item }) => {
 
     const onClick = useEditorEventCallback((view) => {
         if (!view) return;
-        item.command(view.state, view.dispatch, view);
+        if (!disabled) item.command(view.state, view.dispatch, view);
         view.focus();
     });
 
