@@ -87,7 +87,7 @@ const Carousel: FC<Props> = ({ node }) => {
             </div>
             <div className='carousel-numb'>{current} / {total}</div>
             <div className='carousel-full' onClick={switchFullscreen}>
-                {isFullscreen ? <Icons.Shrink/> : <Icons.Expand/>}
+                {isFullscreen ? <Icons.Minimize/> : <Icons.Maximize/>}
             </div>
             {canPrev && <div className='carousel-prev' onClick={e => scrollTo(e, -1)}><Icons.ChevronLeft/></div>}
             {canNext && <div className='carousel-next' onClick={e => scrollTo(e,  1)}><Icons.ChevronRight/></div>}

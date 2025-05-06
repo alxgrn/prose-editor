@@ -52,7 +52,7 @@ const Image: FC<Props> = ({ node }) => {
         >
             <img src={src} onClick={switchFullscreen}/>
             <div className='image-full' onClick={switchFullscreen}>
-                {isFullscreen ? <Icons.Shrink/> : <Icons.Expand/>}
+                {isFullscreen ? <Icons.Minimize/> : <Icons.Maximize/>}
             </div>
         </div>
     );
