@@ -2,7 +2,7 @@
  * Карусель с картинками
  */
 import { Icons } from "@alxgrn/telefrag-ui";
-import { NodeViewComponentProps, useEditorEventCallback, useStopEvent } from "@handlewithcare/react-prosemirror";
+import { NodeViewComponentProps, useEditorEventCallback } from "@handlewithcare/react-prosemirror";
 import { forwardRef, useEffect, useRef, useState } from "react";
 import InsertImage from "../menubar/elements/InsertImage";
 
@@ -25,11 +25,6 @@ const CarouselView = forwardRef<HTMLDivElement, NodeViewComponentProps>(
             setCanNext(pos < fullWidth - width * 1.5);
             //console.log(`pos=${pos} width=${width} fullWidth=${fullWidth}`);
         };
-
-        // Не уверен что тут это необходимо, т.к. в ImageView оно уже есть
-        useStopEvent(() => {
-            return true;
-        });
 
         // Скролл к добавленному изображению
         useEffect(() => {
