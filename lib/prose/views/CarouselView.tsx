@@ -2,7 +2,7 @@
  * Карусель с картинками
  */
 import { Icons } from "@alxgrn/telefrag-ui";
-import { NodeViewComponentProps, useEditorEventCallback } from "@handlewithcare/react-prosemirror";
+import { NodeViewComponentProps, useEditorEffect, useEditorEventCallback } from "@handlewithcare/react-prosemirror";
 import { forwardRef, useEffect, useRef, useState } from "react";
 import InsertImage from "../menubar/elements/InsertImage";
 
@@ -10,7 +10,6 @@ const CarouselView = forwardRef<HTMLDivElement, NodeViewComponentProps>(
     function Carousel({ children, nodeProps, ...props }, outerRef) {
         const listRef = useRef<HTMLDivElement>(null);
         const [ isImagePrompt, setIsImagePrompt ] = useState(false);
-        const [ canScroll, setCanScroll ] = useState(false);
         const [ canPrev, setCanPrev ] = useState(false);
         const [ canNext, setCanNext ] = useState(false);
         const [ pos, setPos ] = useState<number>();
@@ -38,11 +37,19 @@ const CarouselView = forwardRef<HTMLDivElement, NodeViewComponentProps>(
         // Позиция для вставки и нужно ли показывать кнопки скролла
         useEffect(() => {
             setPos(nodeProps.getPos() + nodeProps.node.nodeSize - 1);
-            setCanScroll(nodeProps.node.childCount > 1);
             if (listRef.current && nodeProps.node.childCount > 1) {
                 updatePrevNext(listRef.current);
             }
         }, [ nodeProps, listRef ]);
+
+        // Пустые карусели удаляем
+        useEditorEffect((view) => {
+            if (!view || nodeProps.node.childCount > 0) return;
+            const tr = view.state.tr;
+            const pos = nodeProps.getPos();
+            const size = nodeProps.node.nodeSize;
+            view.dispatch(tr.delete(pos, pos + size));
+        }, [ nodeProps ]);
 
         // Удаляет карусель
         const onDelete = useEditorEventCallback((view) => {
@@ -79,11 +86,9 @@ const CarouselView = forwardRef<HTMLDivElement, NodeViewComponentProps>(
                 <div className='carousel-buttons'>
                     <div onClick={onDelete} className='text-button'>Удалить карусель</div>
                     <div onClick={onInsert}><Icons.Plus/></div>
-                </div>
-                {canScroll && <>
-                    {canPrev && <div className='carousel-prev' onClick={e => scrollTo(e, -1)}><Icons.ChevronLeft/></div>}
-                    {canNext && <div className='carousel-next' onClick={e => scrollTo(e,  1)}><Icons.ChevronRight/></div>}
-                </>}
+                </div>                
+                {canPrev && <div className='carousel-prev' onClick={e => scrollTo(e, -1)}><Icons.ChevronLeft/></div>}
+                {canNext && <div className='carousel-next' onClick={e => scrollTo(e,  1)}><Icons.ChevronRight/></div>}
                 <InsertImage pos={pos} isOpen={isImagePrompt} onClose={() => setIsImagePrompt(false)} />
             </div>
         );

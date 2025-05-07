@@ -65,14 +65,7 @@ const ImageView = forwardRef<HTMLDivElement, NodeViewComponentProps>(
             const tr = view.state.tr;
             const pos = nodeProps.getPos();
             const size = nodeProps.node.nodeSize;
-            const parent = view.state.doc.resolve(pos).parent;
-            if (parent.type.name === 'carousel' && parent.childCount === 1) {
-                // Если это была единственная картинка в карусели, то удаляем пустую карусель
-                view.dispatch(tr.delete(pos - 1, pos - 1 + parent.nodeSize));
-            } else {
-                // Иначе просто удаляем саму картинку
-                view.dispatch(tr.delete(pos, pos + size));
-            }
+            view.dispatch(tr.delete(pos, pos + size));
         });
 
         return (
