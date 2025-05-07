@@ -1,7 +1,7 @@
 {
   "name": "@alxgrn/prose-editor",
   "description": "Editor based on ProseMirror engine",
-  "version": "0.0.12",
+  "version": "0.0.13",
   "private": false,
   "author": "Alexander Fedorov <alex@molner.ru>",
   "license": "Apache-2.0",
