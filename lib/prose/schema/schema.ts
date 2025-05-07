@@ -25,7 +25,7 @@ const nodesWithTables = nodes
     .append({ carousel })
     .append(tableNodes({
         tableGroup: 'block',
-        cellContent: '(paragraph | ordered_list | bullet_list)*',
+        cellContent: '(paragraph | ordered_list | bullet_list)+', // важно использовать + а не * !
         cellAttributes: {
             halign: {
                 default: null,
