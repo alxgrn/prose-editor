@@ -16,7 +16,6 @@ export const image: NodeSpec = {
         title: { default: null, validate: 'string|null' },
     },
     group: 'block',
-    draggable: true,
     parseDOM: [{tag: 'img[src]', getAttrs(dom: HTMLElement) {
         return {
             fid: dom.getAttribute('fid'),
@@ -41,7 +40,6 @@ export const video: NodeSpec = {
         title: { default: null, validate: 'string|null' },
     },
     group: 'block',
-    draggable: true,
     parseDOM: [{tag: 'iframe[src]', getAttrs(dom: HTMLElement) {
         return {
             src: dom.getAttribute('src'),
@@ -84,7 +82,6 @@ export const heading: NodeSpec = {
     content: 'inline*',
     marks: 'underline strikethrough',
     group: 'block',
-    defining: true,
     parseDOM: [{tag: 'h1', attrs: {level: 1}},
                {tag: 'h2', attrs: {level: 2}},
                {tag: 'h3', attrs: {level: 3}},
