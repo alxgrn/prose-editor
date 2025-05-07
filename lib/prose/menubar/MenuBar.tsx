@@ -27,7 +27,7 @@ export const MenuBar: FC<Props> = ({ schema, onSave }) => (
         <InsertBlocks schema={schema}/>
         <WrapBlockMenu schema={schema}/>
         <AlignMenu schema={schema}/>
-        <BlockCommands/>
+        <BlockCommands schema={schema}/>
         <UndoRedo/>
         <div className='MenuBlock'>
             <SaveButton onSave={onSave}/>

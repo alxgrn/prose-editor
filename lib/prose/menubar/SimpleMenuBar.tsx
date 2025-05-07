@@ -20,7 +20,7 @@ export const SimpleMenuBar: FC<Props> = ({ schema }) => (
         <InlineMarks schema={schema}/>
         <InsertBlocks schema={schema}/>
         <WrapBlockMenu schema={schema}/>
-        <BlockCommands/>
+        <BlockCommands schema={schema}/>
         <UndoRedo/>
     </div>
 );

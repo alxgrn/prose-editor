@@ -3,7 +3,9 @@
     align-items: center;
     gap: var(--alxgrn-unit-small);
     flex-wrap: wrap;
-    border-bottom: 1px solid var(--alxgrn-border);
     padding: var(--alxgrn-unit-small);
+/*
     padding-bottom: var(--alxgrn-unit-half);
+    border-bottom: 1px solid var(--alxgrn-border);
+*/
 }
