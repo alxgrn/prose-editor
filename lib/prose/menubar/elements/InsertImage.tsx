@@ -7,11 +7,12 @@ import { useEditorEffect, useEditorEventCallback } from '@handlewithcare/react-p
 import { ImagePluginState, ImagePluginKey, insertImage, uploadImage } from '../../plugins/imagePlugin';
 
 export interface Props {
+    pos?: number;
     isOpen: boolean;
     onClose: () => void;
 }
 
-const InsertImage: FC<Props> = ({ isOpen, onClose }) => {
+const InsertImage: FC<Props> = ({ pos, isOpen, onClose }) => {
     const [ href, setHref ] = useState('');
     const [ image, setImage ] = useState<File>();
     const [ title, setTitle ] = useState('');
@@ -32,9 +33,9 @@ const InsertImage: FC<Props> = ({ isOpen, onClose }) => {
     const onFormSubmit = useEditorEventCallback((view) => {
         if (!view) return;
         if (canUpload) {
-            uploadImage(view, image, title);
+            uploadImage(view, image, title, pos);
         } else {
-            insertImage(view, href, title);
+            insertImage(view, href, title, pos);
         }
         view.focus();
         onClose();

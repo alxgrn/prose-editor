@@ -79,14 +79,19 @@ function uploadFile(file: File) {
 /**
  * Загрузка изображения на сервер и вставка в текущую позицию курсора
  */
-export const uploadImage = async (view: EditorView, file?: File|null, title?: string) => {
+export const uploadImage = async (view: EditorView, file?: File|null, title?: string, pos?: number) => {
     if (!file) return;
     // Уникальный идентификатор для загрузки
     const id = Date.now();
-    // Заменяем выделение плейсхолдером
+    // Размещаем плейсхолдер
     const tr = view.state.tr;
-    if (!tr.selection.empty) tr.deleteSelection();
-    tr.setMeta(ImagePluginKey, { add: { id, pos: tr.selection.from }});
+    if (pos === undefined) {
+        // Ставим плейсхолдер в текущее положение курсора заменяя выделение
+        if (!tr.selection.empty) tr.deleteSelection();
+        pos = tr.selection.from;
+    }
+    // Ставим плейсхолдер в указанную позицию
+    tr.setMeta(ImagePluginKey, { add: { id, pos }});
     view.dispatch(tr);
     // Вызываем функцию загрузки
     try {
@@ -117,13 +122,15 @@ export const uploadImage = async (view: EditorView, file?: File|null, title?: st
     }
 };
 /**
- * Вставка картинки по URL в текущую позицию курсора
+ * Вставка картинки по URL
  */
-export const insertImage = (view: EditorView, src?: string, title?: string) => {
+export const insertImage = (view: EditorView, src?: string, title?: string, pos?: number) => {
     if (!src) return;
     const tr = view.state.tr;
-    if (!tr.selection.empty) tr.deleteSelection();
-    const pos = tr.selection.from;
+    if (pos === undefined) {
+        if (!tr.selection.empty) tr.deleteSelection();
+        pos = tr.selection.from;
+    }
     const schema = (ImagePluginKey.getState(view.state) as ImagePluginState).schema;
     view.dispatch(view.state.tr.replaceWith(pos, pos, schema.nodes.image.create({ src, title })));
 };

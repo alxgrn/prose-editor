@@ -5,7 +5,6 @@ import { Icons } from "@alxgrn/telefrag-ui";
 import { NodeViewComponentProps, useEditorEventCallback, useStopEvent } from "@handlewithcare/react-prosemirror";
 import { forwardRef, useEffect, useRef, useState } from "react";
 import InsertImage from "../menubar/elements/InsertImage";
-import { TextSelection } from "prosemirror-state";
 
 const CarouselView = forwardRef<HTMLDivElement, NodeViewComponentProps>(
     function Carousel({ children, nodeProps, ...props }, outerRef) {
@@ -14,6 +13,7 @@ const CarouselView = forwardRef<HTMLDivElement, NodeViewComponentProps>(
         const [ canScroll, setCanScroll ] = useState(false);
         const [ canPrev, setCanPrev ] = useState(false);
         const [ canNext, setCanNext ] = useState(false);
+        const [ pos, setPos ] = useState<number>();
 
         // Обновляет видимость кнопок сролла
         const updatePrevNext = (target: HTMLDivElement) => {
@@ -30,8 +30,9 @@ const CarouselView = forwardRef<HTMLDivElement, NodeViewComponentProps>(
             return true;
         });
 
-        // Нужно ли показывать кнопки скролла
+        // Позиция для вставки и нужно ли показывать кнопки скролла
         useEffect(() => {
+            setPos(nodeProps.getPos() + nodeProps.node.nodeSize - 1);
             setCanScroll(nodeProps.node.childCount > 1);
             if (listRef.current && nodeProps.node.childCount > 1) {
                 updatePrevNext(listRef.current);
@@ -46,15 +47,10 @@ const CarouselView = forwardRef<HTMLDivElement, NodeViewComponentProps>(
             view.dispatch(view.state.tr.delete(pos, pos + size));
         });
 
-        // Устанавливает курсор в конец карусели и вставляет картинку
-        const onInsert = useEditorEventCallback((view) => {
-            if (!view) return;
-            const pos = nodeProps.getPos();
-            const size = nodeProps.node.nodeSize;
-            const selPos = view.state.doc.resolve(pos + size - 1);
-            view.dispatch(view.state.tr.setSelection(new TextSelection(selPos)));
+        // Вставляет картинку в конец карусели
+        const onInsert = () => {
             setIsImagePrompt(true);
-        });
+        };
 
         // Отслеживаем событие скролла для определения видимости кнопок листания
         const onScroll = (event: React.UIEvent<HTMLDivElement>) => {
@@ -83,7 +79,7 @@ const CarouselView = forwardRef<HTMLDivElement, NodeViewComponentProps>(
                     {canPrev && <div className='carousel-prev' onClick={e => scrollTo(e, -1)}><Icons.ChevronLeft/></div>}
                     {canNext && <div className='carousel-next' onClick={e => scrollTo(e,  1)}><Icons.ChevronRight/></div>}
                 </>}
-                <InsertImage isOpen={isImagePrompt} onClose={() => setIsImagePrompt(false)} />
+                <InsertImage pos={pos} isOpen={isImagePrompt} onClose={() => setIsImagePrompt(false)} />
             </div>
         );
     }
