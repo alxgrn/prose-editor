@@ -14,6 +14,7 @@ const CarouselView = forwardRef<HTMLDivElement, NodeViewComponentProps>(
         const [ canPrev, setCanPrev ] = useState(false);
         const [ canNext, setCanNext ] = useState(false);
         const [ pos, setPos ] = useState<number>();
+        const [ width, setWidth ] = useState<number>();
 
         // Обновляет видимость кнопок сролла
         const updatePrevNext = (target: HTMLDivElement) => {
@@ -29,6 +30,15 @@ const CarouselView = forwardRef<HTMLDivElement, NodeViewComponentProps>(
         useStopEvent(() => {
             return true;
         });
+
+        // Скролл к добавленному изображению
+        useEffect(() => {
+            if (!listRef.current) return;
+            if (width && listRef.current.scrollWidth > width) {
+                listRef.current.scrollLeft = listRef.current.scrollWidth - listRef.current.clientWidth;
+            }
+            setWidth(listRef.current.scrollWidth);
+        }, [ listRef.current?.scrollWidth ]);
 
         // Позиция для вставки и нужно ли показывать кнопки скролла
         useEffect(() => {
