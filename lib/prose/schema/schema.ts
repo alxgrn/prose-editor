@@ -57,7 +57,7 @@ const nodesWithTables = nodes
 
 // Сделаем схему с таблицами и списками
 export const schema = new Schema({
-    nodes: addListNodes(nodesWithTables, "(paragraph | ordered_list | bullet_list)*", "block"),
+    nodes: addListNodes(nodesWithTables, "(paragraph | ordered_list | bullet_list)+", "block"),
     marks,
 });
 

@@ -4,18 +4,18 @@
  */
 .ProseMirror .tableWrapper {
     overflow-x: auto;
-    /* visual */
-    margin: 1em 0;
 }
 
 .ProseMirror table {
+    position: relative;
     border-collapse: collapse;
     table-layout: fixed;
-    width: 100%;
     /* overflow: hidden; */
-    /* visual */
     margin: var(--alxgrn-unit-double) 0 var(--alxgrn-unit) 0;
+    width: calc(100% - var(--alxgrn-unit));
+    margin-left: var(--alxgrn-unit);
 }
+
 
 .ProseMirror td,
 .ProseMirror th {
@@ -78,12 +78,6 @@
 }
 
 /* Заголовок таблицы используем для иконки удаления */
-.ProseMirror table {
-    position: relative;
-    width: calc(100% - var(--alxgrn-unit));
-    margin-left: var(--alxgrn-unit);
-}
-
 .ProseMirror table caption {
     position: absolute;
     top: calc(-1 * var(--alxgrn-unit));
