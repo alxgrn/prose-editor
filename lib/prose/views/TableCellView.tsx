@@ -6,13 +6,16 @@
  */
 import { NodeViewComponentProps } from "@handlewithcare/react-prosemirror";
 import { forwardRef, useEffect, useRef, useState } from "react";
-import TableCellMenu from "./TableCellMenu";
+import TableMenu from "./TableMenu";
 import TableCellResizer from "./TableCellResizer";
+import TableCellMenu from "./TableCellMenu";
 //import { colsWidthFromDOM } from "../utils";
 
 const TableCellView = forwardRef<HTMLTableCellElement, NodeViewComponentProps>(
     function TableCell({ children, nodeProps, ...props }, outerRef) {
         const innerRef = useRef<HTMLTableCellElement>(null);
+        const [ firstCol, setFirstCol ] = useState(false);
+        const [ firstRow, setFirstRow ] = useState(false);
         const [ isRowMenuOpen, setIsRowMenuOpen ] = useState(false);
         const [ isCellMenuOpen, setIsCellMenuOpen ] = useState(false);
         const [ isColumnMenuOpen, setIsColumnMenuOpen ] = useState(false);
@@ -35,14 +38,27 @@ const TableCellView = forwardRef<HTMLTableCellElement, NodeViewComponentProps>(
 
         // Узнаем надо или нет размещать ползунок для изменения ширины ячейки
         useEffect(() => {
-            const node = innerRef.current;
-            if (!node || !node.parentNode) return;
-            const number = Array.prototype.indexOf.call(node.parentNode.children, node);
-            setIsResizible(number < node.parentNode.children.length - 1);
+            const cell = innerRef.current;
+            const row = cell?.parentNode;
+            const tbody = row?.parentNode;
+            if (!cell || !row || !tbody) return;
+            setIsResizible(row.lastChild !== cell);
             setIsResizible(false); // пока выключим
+            setFirstCol(row.firstChild === cell);
+            setFirstRow(Array.from(tbody.children)[0] === row);
+
         }, [ innerRef ]);
 
-        // Показываем контекстное
+        // Показывает контекстное меню ячейки.
+        // Изначально мы использовали для вызова контекстного меню
+        // столбцов и рядов ::before и ::after управляющих ячеек. Поэтому
+        // для определения какое именно меню надо показать использовали
+        // проверку на место клика вне самой ячейки.
+        // Затем вместо псевдоэлементов стали использовать TableCellMenu
+        // и проверка координат уже не нужна, т.к. можно точно знать какое
+        // меню показывать по компоненту, в котором произошел клик.
+        // Однако, механизм вызова именно контекстного меню оставили пока
+        // тут на тот случай, если вдруг опять вернемся к ::before/after
         const onContextMenu = (e: React.MouseEvent<HTMLDivElement>) => {
             e.preventDefault();
             e.stopPropagation();
@@ -89,12 +105,18 @@ const TableCellView = forwardRef<HTMLTableCellElement, NodeViewComponentProps>(
                 }}
             >
                 {children}
+                <TableCellMenu
+                    firstCol={firstCol}
+                    firstRow={firstRow}
+                    onColMenu={() => setIsColumnMenuOpen(true)}
+                    onRowMenu={() => setIsRowMenuOpen(true)}
+                />
                 <TableCellResizer
                     parent={innerRef.current}
                     isResizible={isResizible}
                     onWidth={onWidth}
                 />
-                <TableCellMenu
+                <TableMenu
                     parent={innerRef.current}
                     isRowMenuOpen={isRowMenuOpen}
                     onRowMenuClose={() => setIsRowMenuOpen(false)}
@@ -130,12 +152,18 @@ const TableCellView = forwardRef<HTMLTableCellElement, NodeViewComponentProps>(
                 }}
             >
                 {children}
+                <TableCellMenu
+                    firstCol={firstCol}
+                    firstRow={firstRow}
+                    onColMenu={() => setIsColumnMenuOpen(true)}
+                    onRowMenu={() => setIsRowMenuOpen(true)}
+                />
                 <TableCellResizer
                     parent={innerRef.current}
                     isResizible={isResizible}
                     onWidth={onWidth}
                 />
-                <TableCellMenu
+                <TableMenu
                     parent={innerRef.current}
                     isRowMenuOpen={isRowMenuOpen}
                     onRowMenuClose={() => setIsRowMenuOpen(false)}
