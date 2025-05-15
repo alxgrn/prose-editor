@@ -12,6 +12,7 @@ import { buildKeymap, buildInputRules } from "prosemirror-example-setup";
 import { imagePlugin } from "./imagePlugin";
 import { goToNextCell, tableEditing } from "prosemirror-tables";
 import { TImageUploader } from "../../types";
+import { reactKeys } from "@handlewithcare/react-prosemirror";
 //import { selectPlugin } from "./plugins/select";
 
 type PluginsOptions = {
@@ -35,6 +36,7 @@ export const plugins = (options: PluginsOptions) => {
         history(),
         imagePlugin(options),
         //selectPlugin,
+        reactKeys(), // не очень понятно нужно ли нам
     ];
 
     return plugins;

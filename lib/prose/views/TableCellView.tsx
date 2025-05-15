@@ -20,7 +20,12 @@ const TableCellView = forwardRef<HTMLTableCellElement, NodeViewComponentProps>(
         const [ isCellMenuOpen, setIsCellMenuOpen ] = useState(false);
         const [ isColumnMenuOpen, setIsColumnMenuOpen ] = useState(false);
         const [ isResizible, setIsResizible ] = useState(false);
-        const [ width, setWidth ] = useState<number>();
+
+        // Для отладки изменения размеров ячейки
+        //useStopEvent((view, event) => {
+        //    if (!view) return false;
+        //    return (event instanceof MouseEvent);
+        //});
 
         // Закрываем свое контекстное меню при вызове контекстного меню вне себя
         useEffect(() => {
@@ -43,7 +48,7 @@ const TableCellView = forwardRef<HTMLTableCellElement, NodeViewComponentProps>(
             const tbody = row?.parentNode;
             if (!cell || !row || !tbody) return;
             setIsResizible(row.lastChild !== cell);
-            setIsResizible(false); // пока выключим
+            //setIsResizible(false); // пока выключим
             setFirstCol(row.firstChild === cell);
             setFirstRow(Array.from(tbody.children)[0] === row);
 
@@ -73,12 +78,6 @@ const TableCellView = forwardRef<HTMLTableCellElement, NodeViewComponentProps>(
             } else {
                 setIsCellMenuOpen(true);
             }
-        };
-
-        const onWidth = (width: number) => {
-            setWidth(width);
-            //if (innerRef.current) colsWidthFromDOM(innerRef.current);
-            //console.log(`width: ${width}`);
         };
 
         // Если надо отобразить заголовок выводим тег TH...
@@ -114,7 +113,8 @@ const TableCellView = forwardRef<HTMLTableCellElement, NodeViewComponentProps>(
                 <TableCellResizer
                     parent={innerRef.current}
                     isResizible={isResizible}
-                    onWidth={onWidth}
+                    node={nodeProps.node}
+                    pos={nodeProps.getPos()}
                 />
                 <TableMenu
                     parent={innerRef.current}
@@ -131,7 +131,7 @@ const TableCellView = forwardRef<HTMLTableCellElement, NodeViewComponentProps>(
         // ...в противном случае выводим тег TD
         return (
             <td {...props}
-                datatype={`width-${width}`}
+                datatype={`width-${nodeProps.node.attrs.colwidth}`}
                 colSpan={nodeProps.node.attrs.colspan}
                 rowSpan={nodeProps.node.attrs.rowspan}
                 style={{
@@ -161,7 +161,8 @@ const TableCellView = forwardRef<HTMLTableCellElement, NodeViewComponentProps>(
                 <TableCellResizer
                     parent={innerRef.current}
                     isResizible={isResizible}
-                    onWidth={onWidth}
+                    node={nodeProps.node}
+                    pos={nodeProps.getPos()}
                 />
                 <TableMenu
                     parent={innerRef.current}

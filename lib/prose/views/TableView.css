@@ -34,7 +34,7 @@
     font-weight: bold;
     text-align: center;
     vertical-align: middle;
-    background-color: darkseagreen;
+    background-color: var(--alxgrn-bg-light);
 }
 
 .ProseMirror td:not([data-colwidth]):not(.column-resize-dragging),

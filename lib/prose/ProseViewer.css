@@ -256,7 +256,7 @@
     font-weight: bold;
     text-align: center;
     vertical-align: middle;
-    background-color: darkseagreen;
+    background-color: var(--alxgrn-bg-light);
 }
 
 .ProseViewer th:first-child,

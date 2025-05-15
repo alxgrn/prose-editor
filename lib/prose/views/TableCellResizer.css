@@ -7,6 +7,7 @@
     left: calc(100% - var(--alxgrn-unit-small));
     bottom: 0;
     width: var(--alxgrn-unit-half);
+    z-index: 10;
 }
 
 .ProseMirror-cell-resizer:hover {

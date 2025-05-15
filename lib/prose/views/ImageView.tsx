@@ -16,9 +16,7 @@ const ImageView = forwardRef<HTMLDivElement, NodeViewComponentProps>(
         // Необходимо для возможности редактирования подписи
         useStopEvent((view, event) => {
             if (!view) return false;
-            const types = ['keydown','keyup','keypress','beforeinput'];
-            // console.log(event.type);
-            return (types.includes(event.type));
+            return !(event instanceof MouseEvent);
         });
 
         // Узнаем можно ли преобразовать картинку в карусель и индекс картинки в карусели
