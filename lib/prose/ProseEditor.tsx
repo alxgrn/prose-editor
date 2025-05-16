@@ -16,6 +16,7 @@ import { schema } from "./schema";
 import './Carousel.css';
 import './ProseMirror.css';
 import './ProseViewer.css';
+//import ColumnResize from "./ColumnResize";
 
 type Props = {
     content: string | null; // Содержимое статьи
@@ -75,6 +76,7 @@ const ProseEditor: FC<Props> = ({ content, onSave, onChange, onUpload }) => {
             >
                 <MenuBar schema={schema} onSave={onSave}/>
                 <ProseMirrorDoc />
+                {/*<ColumnResize />*/}
             </ProseMirror>
         </div>
     );
