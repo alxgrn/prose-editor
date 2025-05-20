@@ -2,8 +2,26 @@
  * Оригинал из https://github.com/ProseMirror/prosemirror-tables/blob/master/style/tables.css
  * но с нашими дополнениями
  */
-.ProseMirror .tableWrapper {
+.ProseMirror .tableWrapper,
+.ProseMirror .table-wrapper {
     overflow-x: auto;
+}
+
+.ProseMirror .table-resizer {
+    height: 12px; /* должно быть согласовано с кодом TableResizer.tsx */
+    position: relative;
+    margin-left: var(--alxgrn-unit);
+}
+
+.ProseMirror .table-resizer div {
+    top: 0;
+    height: 100%;
+    aspect-ratio: 1/1;
+    border-radius: 50%;
+    position: absolute;
+    background-color: red;
+    cursor: ew-resize;
+    cursor: col-resize;
 }
 
 .ProseMirror table {

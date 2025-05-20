@@ -99,6 +99,7 @@ const TableCellResizer: FC<Props> = ({ parent, isResizible, node, pos }) => {
         return () => document.removeEventListener('mouseup', onMouseUp);
     }, [ dragging ]);
 
+    // Перетаскивание
     useEffect(() => {
         const onMouseMove = (e: MouseEvent) => {
             if (!dragging) return;
