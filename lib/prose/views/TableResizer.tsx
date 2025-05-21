@@ -1,19 +1,22 @@
 /**
- * Вспомогательный компонент для изменения ширины ячейки таблицы.
+ * Вспомогательный компонент для изменения ширин колонок таблицы.
  * К сожалению, плагины columnResizing и tableEditing из prosemirror-tables
  * совместно не работают под react-prosemirror:
  * https://github.com/handlewithcarecollective/react-prosemirror/discussions/63
- * Поэтому пришлось изобретать свой ресайзер для колонок.
+ * Поэтому пришлось изобретать свой ресайзер.
  */
 import { FC, useEffect, useState } from 'react';
 
-export const SIZE = 12;
-export const BORDER_SIZE = 1;
-export const MIN_WIDTH = 50;
+export const SIZE = 12; // Размер ползунка
+export const BORDER_SIZE = 1; // Ширина бордера
+export const MIN_WIDTH = 50; // Минимальная ширина столбца
 
 type Props = {
+    // Массив текущих ширин столбцов в пикселах
     width: number[];
+    // Вызывается во время перетаскивания ползунка и нужен для отображения ширин в редакторе
     onChange: (w: number[]) => void;
+    // Вызывается после завершения перетаскивания и нужен для записи новых значений в документ
     onWidth: (w: number[]) => void;
 }
 

@@ -48,7 +48,7 @@ const TableCellView = forwardRef<HTMLTableCellElement, NodeViewComponentProps>(
             const tbody = row?.parentNode;
             if (!cell || !row || !tbody) return;
             setIsResizible(row.lastChild !== cell);
-            //setIsResizible(false); // пока выключим
+            setIsResizible(false); // пока выключим
             setFirstCol(row.firstChild === cell);
             setFirstRow(Array.from(tbody.children)[0] === row);
 

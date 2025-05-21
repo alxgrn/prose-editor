@@ -4,7 +4,8 @@
  */
 .ProseMirror .tableWrapper,
 .ProseMirror .table-wrapper {
-    overflow-x: auto;
+    overflow: hidden;
+    margin: var(--alxgrn-unit) 0;
 }
 
 .ProseMirror .table-resizer {
@@ -19,7 +20,7 @@
     aspect-ratio: 1/1;
     border-radius: 50%;
     position: absolute;
-    background-color: red;
+    background-color: var(--alxgrn-border);
     cursor: ew-resize;
     cursor: col-resize;
 }
@@ -29,8 +30,8 @@
     border-collapse: collapse;
     table-layout: fixed;
     /* overflow: hidden; */
-    margin: var(--alxgrn-unit-double) 0 var(--alxgrn-unit) 0;
     width: calc(100% - var(--alxgrn-unit));
+    margin-top: var(--alxgrn-unit);
     margin-left: var(--alxgrn-unit);
 }
 
@@ -43,7 +44,7 @@
     position: relative;
     /* visual */
     min-width: 1em;
-    border: 1px solid #ddd;
+    border: 1px solid var(--alxgrn-border);
     padding: var(--alxgrn-unit-small) var(--alxgrn-unit-half);
 }
 
