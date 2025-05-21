@@ -82,8 +82,7 @@
     margin: 0 auto;
 }
 
-.ProseViewer div.image::after {
-    content: attr(title);
+.ProseViewer div.image .image-title {
     font-style: italic;
     display: block;
     width: 80%;
@@ -102,7 +101,7 @@
     align-items: center;
 }
 
-.ProseViewer div.image:fullscreen::after {
+.ProseViewer div.image:fullscreen .image-title {
     display: none;
 }
 

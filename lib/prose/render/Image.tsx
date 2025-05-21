@@ -10,6 +10,7 @@ type Props = {
 const Image: FC<Props> = ({ node }) => {
     const ref  = useRef<HTMLDivElement>(null);
     const [ src, setSrc ] = useState('');
+    const [ alt, setAlt ] = useState('');
     const [ title, setTitle ] = useState('');
     const [ isFullscreen, setIsFullscreen ] = useState(false);
 
@@ -29,6 +30,7 @@ const Image: FC<Props> = ({ node }) => {
         if (fid) src = `${API_URL}/files/${fid}`;
         if (!src) src = ERROR_IMAGE_DATA;
         setSrc(src);
+        setAlt(node.attrs?.alt ? `${node.attrs?.alt}`: '');
         setTitle(node.attrs?.title ? `${node.attrs?.title}`: '');
     }, [ node ]);
 
@@ -47,10 +49,10 @@ const Image: FC<Props> = ({ node }) => {
     return (
         <div
             ref={ref}
-            title={title}
             className='image'
         >
-            <img src={src} onClick={switchFullscreen}/>
+            <img src={src} onClick={switchFullscreen} alt={alt} title={title}/>
+            {title && <div className='image-title'>{title}</div>}
             <div className='image-full' onClick={switchFullscreen}>
                 {isFullscreen ? <Icons.Minimize/> : <Icons.Maximize/>}
             </div>

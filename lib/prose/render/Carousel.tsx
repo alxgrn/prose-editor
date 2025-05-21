@@ -106,24 +106,29 @@ type ImageProps = {
 
 const Image: FC<ImageProps> = ({ node, onClick }) => {
     const [ src, setSrc ] = useState('');
+    const [ alt, setAlt ] = useState('');
     const [ title, setTitle ] = useState('');
 
     useEffect(() => {
         let fid = node.attrs?.fid;
-        let src = node.attrs?.src ? `${node.attrs?.src}` : '';
+        let src = node.attrs?.src ? `${node.attrs.src}` : '';
+        let alt = node.attrs?.alt ? `${node.attrs.alt}` : '';
         let title = node.attrs?.title ? `${node.attrs.title}` : '';
         
         if (fid) src = `${API_URL}/files/${fid}`;
         if (!src) src = ERROR_IMAGE_DATA;
 
         setSrc(src);
+        setAlt(alt);
         setTitle(title);
     }, [ node ]);
 
     if (node.type !== 'image') return null;
 
-    return (<div className='image' title={title}>
-        {src && <img src={src} onClick={onClick}/>}
+    return (
+    <div className='image'>
+        {src && <img src={src} onClick={onClick} alt={alt} title={title}/>}
+        {title && <div className='image-title'>{title}</div>}
     </div>);
 };
 

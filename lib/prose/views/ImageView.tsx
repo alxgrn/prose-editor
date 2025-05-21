@@ -9,6 +9,7 @@ import { API_URL } from "../../config";
 
 const ImageView = forwardRef<HTMLDivElement, NodeViewComponentProps>(
     function Image({ children, nodeProps, ...props }, outerRef) {
+        const [ alt, setAlt ] = useState(nodeProps.node.attrs.alt ?? '');
         const [ title, setTitle ] = useState(nodeProps.node.attrs.title ?? '');
         const [ canCarousel, setCanCarousel ] = useState(false);
         const [ position, setPosition ] = useState('');
@@ -34,6 +35,16 @@ const ImageView = forwardRef<HTMLDivElement, NodeViewComponentProps>(
                 });
                 setPosition(index ? `${index} / ${parent.childCount}` : '');
             }
+        });
+
+        // Изменение описания
+        const onAltChange = useEditorEventCallback((view, alt: string) => {
+            if (!view) return;
+            setAlt(alt);
+            const tr = view.state.tr;
+            const pos = nodeProps.getPos();
+            view.dispatch(tr.setNodeMarkup(pos, null, { ...nodeProps.node.attrs, alt }));
+            view.focus();
         });
 
         // Изменение подписи
@@ -78,6 +89,18 @@ const ImageView = forwardRef<HTMLDivElement, NodeViewComponentProps>(
                     {position && <div className='text-button'>{position}</div>}
                     <div onClick={onDelete}><Icons.Trash/></div>
                 </div>
+                <div>
+                    <Editable
+                        value={alt}
+                        placeholder='Alt: описание изображения (не обязательно)'
+                        onChange={onAltChange}
+                        empty
+                        style={{
+                            textAlign: 'center',
+                            cursor: 'text',
+                        }}
+                    />
+                </div>
                 <img
                     title={nodeProps.node.attrs.title}
                     //fid={nodeProps.node.attrs.fid}
@@ -87,7 +110,7 @@ const ImageView = forwardRef<HTMLDivElement, NodeViewComponentProps>(
                 <div>
                     <Editable
                         value={title}
-                        placeholder='Подпись под изображением (не обязательно)'
+                        placeholder='Title: подпись под изображением (не обязательно)'
                         onChange={onTitleChange}
                         empty
                         style={{

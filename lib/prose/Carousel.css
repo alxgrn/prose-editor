@@ -92,7 +92,7 @@ div.carousel div.carousel-list div.image {
     margin: 0;
 }
 
-div.carousel:fullscreen div.carousel-list div.image::after {
+div.carousel:fullscreen div.carousel-list div.image .image-title {
     display: none;
 }
 
