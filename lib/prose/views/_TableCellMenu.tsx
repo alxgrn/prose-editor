@@ -2,7 +2,6 @@
  * Компонент для отображения плашек вызова меню строк и столбцов
  */
 import { FC } from 'react';
-import './TableCellMenu.css';
 
 type Props = {
     firstCol: boolean;

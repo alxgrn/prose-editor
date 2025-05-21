@@ -30,7 +30,8 @@ const TableResizer: FC<Props> = ({ width, onChange, onWidth }) => {
         const currentWidth = width[current];
         const nextWidth = width[current + 1];
         const newWidth = [...innerWidth];
-        if (currentWidth + offset < MIN_WIDTH || nextWidth - offset < MIN_WIDTH) return newWidth;
+        if (currentWidth + offset < MIN_WIDTH) offset = MIN_WIDTH - currentWidth;
+        if (nextWidth - offset < MIN_WIDTH) offset = nextWidth - MIN_WIDTH;
         newWidth[current] = currentWidth + offset;
         newWidth[current + 1] = nextWidth - offset;
         return newWidth;
@@ -91,10 +92,7 @@ const TableResizer: FC<Props> = ({ width, onChange, onWidth }) => {
         <div className='table-resizer'>
             {innerWidth.map((_, index) => <div
                 key={index}
-                style={{
-                    left: getLeft(index) + 'px',
-                    display: `${index === innerWidth.length - 1 ? 'none' : undefined}`
-                }}
+                style={{left: getLeft(index) + 'px'}}
                 onMouseDown={e => onMouseDown(e, index)}
             />)}
         </div>

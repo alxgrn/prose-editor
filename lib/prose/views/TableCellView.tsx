@@ -7,19 +7,19 @@
 import { NodeViewComponentProps } from "@handlewithcare/react-prosemirror";
 import { forwardRef, useEffect, useRef, useState } from "react";
 import TableMenu from "./TableMenu";
-import TableCellResizer from "./TableCellResizer";
-import TableCellMenu from "./TableCellMenu";
+//import TableCellResizer from "./TableCellResizer";
+//import TableCellMenu from "./TableCellMenu";
 //import { colsWidthFromDOM } from "../utils";
 
 const TableCellView = forwardRef<HTMLTableCellElement, NodeViewComponentProps>(
     function TableCell({ children, nodeProps, ...props }, outerRef) {
         const innerRef = useRef<HTMLTableCellElement>(null);
-        const [ firstCol, setFirstCol ] = useState(false);
-        const [ firstRow, setFirstRow ] = useState(false);
+        //const [ firstCol, setFirstCol ] = useState(false);
+        //const [ firstRow, setFirstRow ] = useState(false);
         const [ isRowMenuOpen, setIsRowMenuOpen ] = useState(false);
         const [ isCellMenuOpen, setIsCellMenuOpen ] = useState(false);
         const [ isColumnMenuOpen, setIsColumnMenuOpen ] = useState(false);
-        const [ isResizible, setIsResizible ] = useState(false);
+        //const [ isResizible, setIsResizible ] = useState(false);
 
         // Для отладки изменения размеров ячейки
         //useStopEvent((view, event) => {
@@ -42,6 +42,7 @@ const TableCellView = forwardRef<HTMLTableCellElement, NodeViewComponentProps>(
         }, []);
 
         // Узнаем надо или нет размещать ползунок для изменения ширины ячейки
+        /*
         useEffect(() => {
             const cell = innerRef.current;
             const row = cell?.parentNode;
@@ -53,17 +54,11 @@ const TableCellView = forwardRef<HTMLTableCellElement, NodeViewComponentProps>(
             setFirstRow(Array.from(tbody.children)[0] === row);
 
         }, [ innerRef ]);
-
+        */
         // Показывает контекстное меню ячейки.
-        // Изначально мы использовали для вызова контекстного меню
-        // столбцов и рядов ::before и ::after управляющих ячеек. Поэтому
-        // для определения какое именно меню надо показать использовали
-        // проверку на место клика вне самой ячейки.
-        // Затем вместо псевдоэлементов стали использовать TableCellMenu
-        // и проверка координат уже не нужна, т.к. можно точно знать какое
-        // меню показывать по компоненту, в котором произошел клик.
-        // Однако, механизм вызова именно контекстного меню оставили пока
-        // тут на тот случай, если вдруг опять вернемся к ::before/after
+        // Используем для вызова контекстного меню столбцов и рядов ::before и
+        // ::after управляющих ячеек. Поэтому для определения какое именно меню
+        // надо показать используем проверку на место клика вне самой ячейки.
         const onContextMenu = (e: React.MouseEvent<HTMLDivElement>) => {
             e.preventDefault();
             e.stopPropagation();
@@ -104,6 +99,7 @@ const TableCellView = forwardRef<HTMLTableCellElement, NodeViewComponentProps>(
                 }}
             >
                 {children}
+                {/*
                 <TableCellMenu
                     firstCol={firstCol}
                     firstRow={firstRow}
@@ -116,6 +112,7 @@ const TableCellView = forwardRef<HTMLTableCellElement, NodeViewComponentProps>(
                     node={nodeProps.node}
                     pos={nodeProps.getPos()}
                 />
+                */}
                 <TableMenu
                     parent={innerRef.current}
                     isRowMenuOpen={isRowMenuOpen}
@@ -152,6 +149,7 @@ const TableCellView = forwardRef<HTMLTableCellElement, NodeViewComponentProps>(
                 }}
             >
                 {children}
+                {/*
                 <TableCellMenu
                     firstCol={firstCol}
                     firstRow={firstRow}
@@ -164,6 +162,7 @@ const TableCellView = forwardRef<HTMLTableCellElement, NodeViewComponentProps>(
                     node={nodeProps.node}
                     pos={nodeProps.getPos()}
                 />
+                */}
                 <TableMenu
                     parent={innerRef.current}
                     isRowMenuOpen={isRowMenuOpen}
