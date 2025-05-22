@@ -75,6 +75,23 @@ const TableCellView = forwardRef<HTMLTableCellElement, NodeViewComponentProps>(
             }
         };
 
+        // По клику открываем только меню рядов и столбцов
+        const onClick = (e: React.MouseEvent<HTMLDivElement>) => {
+            setIsRowMenuOpen(false);
+            setIsCellMenuOpen(false);
+            setIsColumnMenuOpen(false);
+            const rect = e.currentTarget.getBoundingClientRect();
+            if (e.clientY < rect.y) {
+                setIsColumnMenuOpen(true);
+            } else if (e.clientX < rect.x) {
+                setIsRowMenuOpen(true);
+            } else {
+                return;
+            }
+            e.preventDefault();
+            e.stopPropagation();
+        };
+
         // Если надо отобразить заголовок выводим тег TH...
         if (nodeProps.node.type.spec.tableRole === 'header_cell') return (
             <th {...props}
@@ -85,6 +102,7 @@ const TableCellView = forwardRef<HTMLTableCellElement, NodeViewComponentProps>(
                     textAlign: nodeProps.node.attrs.halign,
                     verticalAlign: nodeProps.node.attrs.valign,
                 }}
+                onClick={onClick}
                 onContextMenu={onContextMenu}
                 ref={(el) => {
                     innerRef.current = el;
@@ -135,6 +153,7 @@ const TableCellView = forwardRef<HTMLTableCellElement, NodeViewComponentProps>(
                     textAlign: nodeProps.node.attrs.halign,
                     verticalAlign: nodeProps.node.attrs.valign,
                 }}
+                onClick={onClick}
                 onContextMenu={onContextMenu}
                 ref={(el) => {
                     innerRef.current = el;

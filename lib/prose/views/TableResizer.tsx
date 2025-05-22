@@ -7,7 +7,7 @@
  */
 import { FC, useEffect, useState } from 'react';
 
-export const SIZE = 12; // Размер ползунка
+export const SIZE = 5; // Размер ползунка
 export const BORDER_SIZE = 1; // Ширина бордера
 export const MIN_WIDTH = 50; // Минимальная ширина столбца
 
@@ -85,7 +85,7 @@ const TableResizer: FC<Props> = ({ width, onChange, onWidth }) => {
     };
 
     const getLeft = (index: number): number => {
-        return innerWidth.slice(0, index + 1).reduce((a,b) => a+b, 0) + index + BORDER_SIZE - SIZE/2;
+        return innerWidth.slice(0, index + 1).reduce((a,b) => a+b, 0) + index + BORDER_SIZE - Math.floor(SIZE/2);
     };
 
     return (

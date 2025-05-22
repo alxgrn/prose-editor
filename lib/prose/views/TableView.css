@@ -8,21 +8,26 @@
     margin: var(--alxgrn-unit) 0;
 }
 
+/* Элемент для изменения ширин столбцов */
 .ProseMirror .table-resizer {
-    height: 12px; /* должно быть согласовано с кодом TableResizer.tsx */
+    height: var(--alxgrn-unit);
     position: relative;
     margin-left: var(--alxgrn-unit);
 }
 
+/* Ползунок для перетаскивания */
 .ProseMirror .table-resizer div {
     top: 0;
     height: 100%;
-    aspect-ratio: 1/1;
-    border-radius: 50%;
+    width: 5px; /* Надо согласовывать с кодом в TableResizer.tsx */
+    border: 1px solid var(--alxgrn-bg-panel);
     position: absolute;
     background-color: var(--alxgrn-border);
     cursor: ew-resize;
     cursor: col-resize;
+    z-index: 100;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
 }
 
 .ProseMirror .table-resizer div:last-child {
@@ -35,7 +40,7 @@
     table-layout: fixed;
     /* overflow: hidden; */
     width: calc(100% - var(--alxgrn-unit));
-    margin-top: var(--alxgrn-unit);
+    
     margin-left: var(--alxgrn-unit);
 }
 
@@ -157,8 +162,8 @@
     display: block;
     background-color: var(--alxgrn-border);
     position: absolute;
-    left: 0;
-    right: 0;
+    left: 2px;
+    right: 2px;
     bottom: 100%;
     height: var(--alxgrn-unit);
     border-top-left-radius: var(--alxgrn-unit-small);
@@ -166,7 +171,15 @@
     cursor: pointer;
 }
 
-/* У последней ячейки первого ряда уберем белый бордер справа */
+/* У первой ячейки первого ряда уберем отступ слева */
+/*.ProseMirror table tbody tr th:last-child .col-menu,
+.ProseMirror table tbody tr td:last-child .col-menu,*/
+.ProseMirror table tbody tr:first-child th:first-child::before,
+.ProseMirror table tbody tr:first-child td:first-child::before {
+    left: 0;
+}
+
+/* У последней ячейки первого ряда уберем отступ справа */
 /*.ProseMirror table tbody tr th:last-child .col-menu,
 .ProseMirror table tbody tr td:last-child .col-menu,*/
 .ProseMirror table tbody tr:first-child th:last-child::before,
