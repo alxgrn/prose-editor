@@ -8,4 +8,5 @@
 * DOM - просмотровщик с пассивными компонентами
 
 Демо: [https://alxgrn.ru/editor/](https://alxgrn.ru/editor/)
-Как использовать [./src/App.tsx](./src/App.tsx)
+
+Как использовать: [./src/App.tsx](./src/App.tsx)
