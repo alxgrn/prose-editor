@@ -1,2 +1,11 @@
 # prose-editor
-Editor based on ProseMirror engine
+### Редактор на основе движка [ProseMirror](https://prosemirror.net/)
+
+Библиотека предоставляет следующие компоненты
+* Editor - редактор с полным набором блоков и маркеров
+* Notes - редактор с усеченным набором блоков и маркеров
+* Viewer - просмотровщик с активными компонентами
+* DOM - просмотровщик с пассивными компонентами
+
+Демо: [https://alxgrn.ru/editor/](https://alxgrn.ru/editor/)
+Как использовать [./src/App.tsx](./src/App.tsx)
