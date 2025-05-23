@@ -7,7 +7,7 @@
  */
 import { FC, useEffect, useState } from 'react';
 
-export const SIZE = 5; // Размер ползунка
+export const SIZE = 7; // Размер ползунка
 export const BORDER_SIZE = 1; // Ширина бордера
 export const MIN_WIDTH = 50; // Минимальная ширина столбца
 

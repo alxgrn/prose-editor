@@ -19,15 +19,12 @@
 .ProseMirror .table-resizer div {
     top: 0;
     height: 100%;
-    width: 5px; /* Надо согласовывать с кодом в TableResizer.tsx */
-    border: 1px solid var(--alxgrn-bg-panel);
+    width: 7px; /* Надо согласовывать с кодом в TableResizer.tsx */
     position: absolute;
-    background-color: var(--alxgrn-border);
+    background-color: transparent;
     cursor: ew-resize;
     cursor: col-resize;
     z-index: 100;
-    border-top-left-radius: 3px;
-    border-top-right-radius: 3px;
 }
 
 .ProseMirror .table-resizer div:last-child {
@@ -162,8 +159,8 @@
     display: block;
     background-color: var(--alxgrn-border);
     position: absolute;
-    left: 2px;
-    right: 2px;
+    left: 0;
+    right: 0;
     bottom: 100%;
     height: var(--alxgrn-unit);
     border-top-left-radius: var(--alxgrn-unit-small);
