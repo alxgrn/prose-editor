@@ -14,6 +14,8 @@ import TableMenu from "./TableMenu";
 const TableCellView = forwardRef<HTMLTableCellElement, NodeViewComponentProps>(
     function TableCell({ children, nodeProps, ...props }, outerRef) {
         const innerRef = useRef<HTMLTableCellElement>(null);
+        const [ x, setX ] = useState(0);
+        const [ y, setY ] = useState(0);
         //const [ firstCol, setFirstCol ] = useState(false);
         //const [ firstRow, setFirstRow ] = useState(false);
         const [ isRowMenuOpen, setIsRowMenuOpen ] = useState(false);
@@ -65,6 +67,8 @@ const TableCellView = forwardRef<HTMLTableCellElement, NodeViewComponentProps>(
             setIsRowMenuOpen(false);
             setIsCellMenuOpen(false);
             setIsColumnMenuOpen(false);
+            setX(e.clientX);
+            setY(e.clientY);
             const rect = e.currentTarget.getBoundingClientRect();
             if (e.clientY < rect.y) {
                 setIsColumnMenuOpen(true);
@@ -80,6 +84,8 @@ const TableCellView = forwardRef<HTMLTableCellElement, NodeViewComponentProps>(
             setIsRowMenuOpen(false);
             setIsCellMenuOpen(false);
             setIsColumnMenuOpen(false);
+            setX(e.clientX);
+            setY(e.clientY);
             const rect = e.currentTarget.getBoundingClientRect();
             if (e.clientY < rect.y) {
                 setIsColumnMenuOpen(true);
@@ -132,7 +138,8 @@ const TableCellView = forwardRef<HTMLTableCellElement, NodeViewComponentProps>(
                 />
                 */}
                 <TableMenu
-                    parent={innerRef.current}
+                    x={x}
+                    y={y}
                     isRowMenuOpen={isRowMenuOpen}
                     onRowMenuClose={() => setIsRowMenuOpen(false)}
                     isCellMenuOpen={isCellMenuOpen}
@@ -183,7 +190,8 @@ const TableCellView = forwardRef<HTMLTableCellElement, NodeViewComponentProps>(
                 />
                 */}
                 <TableMenu
-                    parent={innerRef.current}
+                    x={x}
+                    y={y}
                     isRowMenuOpen={isRowMenuOpen}
                     onRowMenuClose={() => setIsRowMenuOpen(false)}
                     isCellMenuOpen={isCellMenuOpen}

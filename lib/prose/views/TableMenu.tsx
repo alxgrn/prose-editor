@@ -82,7 +82,8 @@ const cellMenuItems: MenuItem[] = [{
 }];
 
 type Props = {
-    parent?: HTMLElement | null;
+    x: number;
+    y: number;
     isRowMenuOpen: boolean;
     isCellMenuOpen: boolean;
     isColumnMenuOpen: boolean;
@@ -92,9 +93,8 @@ type Props = {
 };
 
 
-const TableMenu: FC<Props> = ({ parent,
-                                    isRowMenuOpen, isCellMenuOpen, isColumnMenuOpen,
-                                    onRowMenuClose, onCellMenuClose, onColumnMenuClose }) => {
+const TableMenu: FC<Props> = ({ x, y, isRowMenuOpen, isCellMenuOpen, isColumnMenuOpen,
+                                onRowMenuClose, onCellMenuClose, onColumnMenuClose }) => {
     const onMenuClick = useEditorEventCallback((view, item: MenuItem) => {
         if (!view) return;
 
@@ -160,35 +160,30 @@ const TableMenu: FC<Props> = ({ parent,
         view.focus();
     });
 
-    if (!parent) return null;
-
     return (<>
         <Menu
-            parent={parent}
+            x={x}
+            y={y}
             items={rowMenuItems}
             isOpen={isRowMenuOpen}
             onClose={onRowMenuClose}
             onClick={onMenuClick}
-            vertical='top'
-            horizontal='inner-left'
         />
         <Menu
-            parent={parent}
+            x={x}
+            y={y}
             items={cellMenuItems}
             isOpen={isCellMenuOpen}
             onClose={onCellMenuClose}
             onClick={onMenuClick}
-            horizontal='inner-left'
         />
         <Menu
-            parent={parent}
+            x={x}
+            y={y}
             items={columnMenuItems}
             isOpen={isColumnMenuOpen}
             onClose={onColumnMenuClose}
             onClick={onMenuClick}
-            vertical='top'
-            horizontal='inner-left'
-            margin='var(--alxgrn-unit)'
         />
     </>);
 };
