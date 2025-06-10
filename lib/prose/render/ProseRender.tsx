@@ -24,7 +24,7 @@ export type Node = {
     text?: string;
     content?: Node[];
     attrs?: {
-        [name: string]: string|number|null;
+        [name: string]: string|number|null|string[];
     };
     marks?: [{
         [name: string]: string|number|null;

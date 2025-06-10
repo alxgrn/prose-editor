@@ -71,10 +71,31 @@
     position: relative;
 }
 
+/* VIDEO SWITCHER */
+.ProseViewer div.video .video-switcher,
+.ProseEditor div.video .video-switcher,
+.ProseNotes div.video .video-switcher {
+    display: flex;
+    gap: var(--alxgrn-unit-small);
+    margin-bottom: var(--alxgrn-unit-small);
+}
+
+.ProseViewer div.video .video-title,
+.ProseEditor div.video .video-title,
+.ProseNotes div.video .video-title {
+    font-style: italic;
+    display: block;
+    width: 80%;
+    margin: 0 auto;
+}
+
 /* IMAGE */
 .ProseNotes div.image img,
 .ProseEditor div.image img,
-.ProseViewer div.image img {
+.ProseViewer div.image img,
+.ProseNotes div.video img,
+.ProseEditor div.video img,
+.ProseViewer div.video img {
     display: block;
     border-radius: var(--alxgrn-unit-small);
     max-width: 100%;
@@ -82,7 +103,9 @@
     margin: 0 auto;
 }
 
-.ProseViewer div.image .image-title {
+.ProseViewer div.image .image-title,
+.ProseEditor div.image .image-title,
+.ProseNotes div.image .image-title {
     font-style: italic;
     display: block;
     width: 80%;
@@ -193,24 +216,6 @@
     border: none;
     margin: 0 auto;
     background-color: var(--alxgrn-border);
-}
-
-.ProseViewer div.video::after {
-    content: attr(title);
-    font-style: italic;
-    display: block;
-    width: 80%;
-    margin: 0 auto;
-}
-
-/* TITLE EDITOR UNDER VIDEO AND IMAGE */
-.ProseNotes div.image > div,
-.ProseEditor div.image > div,
-.ProseNotes div.video > div,
-.ProseEditor div.video > div {
-    font-style: italic;
-    width: 80%;
-    margin: 0 auto;
 }
 
 /* CODE BLOCK */

@@ -36,8 +36,17 @@ export const image: NodeSpec = {
 export const video: NodeSpec = {
     atom: true,
     attrs: {
-        src: { validate: 'string' },
         title: { default: null, validate: 'string|null' },
+        src: { validate: val => {
+            if (typeof val === 'string') return;
+            if (Array.isArray(val)) {
+                val.forEach(v => {
+                    if (typeof v !== 'string') throw new Error('One of the video sources is not a string');
+                });
+                return;
+            }
+            throw new Error('Video source must be a string or array of strings');
+        }},
     },
     group: 'block',
     parseDOM: [{tag: 'iframe[src]', getAttrs(dom: HTMLElement) {

@@ -2,16 +2,19 @@
  * Кастомное отображение видео для реактора.
  * Необходимо для возможности изменения подписи и URL.
  */
-import { Editable } from "@alxgrn/telefrag-ui";
+import { Button, Editable } from "@alxgrn/telefrag-ui";
 import { NodeViewComponentProps, useEditorEventCallback, useStopEvent } from "@handlewithcare/react-prosemirror";
 import { forwardRef, useEffect, useState } from "react";
-import { sanitizeVideoURL } from "../../utils/link";
+import { validateRutubeURL, validateVkvideoURL, validateYoutubeURL } from "../../utils/link";
 import { ERROR_EMBED_DATA } from "../../config";
 
 
 const VideoView = forwardRef<HTMLDivElement, NodeViewComponentProps>(
     function Video({ children, nodeProps, ...props }, outerRef) {
         const [ src, setSrc ] = useState('');
+        const [ rutube, setRutube ] = useState('');
+        const [ youtube, setYoutube ] = useState('');
+        const [ vkvideo, setVkvideo ] = useState('');
         const [ title, setTitle ] = useState(nodeProps.node.attrs.title ?? '');
         const allow = 'fullscreen; accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
 
@@ -20,10 +23,23 @@ const VideoView = forwardRef<HTMLDivElement, NodeViewComponentProps>(
         });
 
         useEffect(() => {
-            setSrc(sanitizeVideoURL(nodeProps.node.attrs.src));
+            let src = nodeProps.node.attrs.src;
+            if (typeof src === 'string') src = [src];
+            (src as string[]).forEach(url => {
+                if (validateRutubeURL(url)) {
+                    setSrc(url);
+                    setRutube(url); 
+                } else if (validateYoutubeURL(url)) {
+                    setSrc(url);
+                    setYoutube(url); 
+                } else if (validateVkvideoURL(url)) {
+                    setSrc(url);
+                    setVkvideo(url);
+                }
+            });
         }, [ nodeProps ]);
 
-        const onClick = useEditorEventCallback((view, title: string) => {
+        const onTitle = useEditorEventCallback((view, title: string) => {
             if (!view) return;
             setTitle(title);
             // Используем механизм обхода всех нод в выделении
@@ -50,15 +66,35 @@ const VideoView = forwardRef<HTMLDivElement, NodeViewComponentProps>(
             <div
                 {...props}
                 ref={outerRef}
-                className={src ? 'video' : 'image'}
+                className='video'
                 title={nodeProps.node.attrs.title}
             >
+                <div className='video-switcher'>
+                    {rutube && <Button
+                        label='RuTube'
+                        size='Small'
+                        type={src === rutube ? 'Accent' : undefined}
+                        onClick={() => setSrc(rutube)}
+                    />}
+                    {youtube && <Button
+                        label='YouTube'
+                        size='Small'
+                        type={src === youtube ? 'Accent' : undefined}
+                        onClick={() => setSrc(youtube)}
+                    />}
+                    {vkvideo && <Button
+                        label='VK Video'
+                        size='Small'
+                        type={src === vkvideo ? 'Accent' : undefined}
+                        onClick={() => setSrc(vkvideo)}
+                    />}
+                </div>
                 {src ? <iframe src={src} allow={allow} /> : <img src={ERROR_EMBED_DATA} />}
-                <div>
+                <div className='video-title'>
                     <Editable
                         value={title}
                         placeholder='Подпись под видео (не обязательно)'
-                        onChange={onClick}
+                        onChange={onTitle}
                         empty
                         style={{
                             textAlign: 'center',

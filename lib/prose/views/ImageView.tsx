@@ -89,7 +89,7 @@ const ImageView = forwardRef<HTMLDivElement, NodeViewComponentProps>(
                     {position && <div className='text-button'>{position}</div>}
                     <div onClick={onDelete}><Icons.Trash/></div>
                 </div>
-                <div>
+                <div className='image-title'>
                     <Editable
                         value={alt}
                         placeholder='Alt: описание изображения (не обязательно)'
@@ -107,7 +107,7 @@ const ImageView = forwardRef<HTMLDivElement, NodeViewComponentProps>(
                     alt={nodeProps.node.attrs.alt}
                     src={nodeProps.node.attrs.fid ? `${API_URL}/files/${nodeProps.node.attrs.fid}` : nodeProps.node.attrs.src}
                 />
-                <div>
+                <div className='image-title'>
                     <Editable
                         value={title}
                         placeholder='Title: подпись под изображением (не обязательно)'
