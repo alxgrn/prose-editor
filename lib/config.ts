@@ -1,9 +1,9 @@
 export const API_URL = 'https://dailytelefrag.ru/api';
 export const VIDEO_IMAGE = 'https://dailytelefrag.ru/video.png';
-export const ROBOT_IMAGE = 'https://dailytelefrag.ru/robot.png';
-export const ERROR_IMAGE = 'https://dailytelefrag.ru/error.gif';
+//export const ROBOT_IMAGE = 'https://dailytelefrag.ru/robot.png';
+//export const ERROR_IMAGE = 'https://dailytelefrag.ru/error.gif';
 export const EMPTY_IMAGE = 'https://dailytelefrag.ru/empty.png';
-export const ROCKET_IMAGE = 'https://dailytelefrag.ru/rocket.png';
-export const WARNING_IMAGE = 'https://dailytelefrag.ru/warning.png';
+//export const ROCKET_IMAGE = 'https://dailytelefrag.ru/rocket.png';
+//export const WARNING_IMAGE = 'https://dailytelefrag.ru/warning.png';
 export const ERROR_IMAGE_DATA = 'https://dailytelefrag.ru/error_image.png';
 export const ERROR_EMBED_DATA = 'https://dailytelefrag.ru/error_embed.png';

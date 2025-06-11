@@ -58,10 +58,11 @@ export const video: NodeSpec = {
     toDOM(node) {
         const { src, title } = node.attrs;
         const allow = 'fullscreen; accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
-        if (!sanitizeVideoURL(src)) {
+        const url = Array.isArray(src) ? src[0] : src;
+        if (!sanitizeVideoURL(url)) {
             return ['div', { title, class: 'image' }, [ 'img', { src: ERROR_EMBED_DATA }]];
         } 
-        return ['div', { title, class: 'video' }, [ 'iframe', { src, title, allow }]];
+        return ['div', { title, class: 'video' }, [ 'iframe', { src: url, title, allow }]];
     }
 };
 
