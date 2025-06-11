@@ -26,7 +26,7 @@
 
 .ProseMirror-selectednode {
     outline: 2px solid #8cf;
-    border-radius: var(--alxgrn-unit-small);
+    border-radius: var(--alxgrn-unit-half);
 }
 
 /**
@@ -43,7 +43,7 @@ li.ProseMirror-selectednode:after {
     right: -2px; top: -2px; bottom: -2px;
     border: 2px solid #8cf;
     pointer-events: none;
-    border-radius: var(--alxgrn-unit-small);
+    border-radius: var(--alxgrn-unit-half);
 }
 
 /**

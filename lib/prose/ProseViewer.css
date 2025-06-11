@@ -79,6 +79,36 @@
     display: flex;
     gap: var(--alxgrn-unit-small);
     margin: var(--alxgrn-unit-small);
+    z-index: 100;
+}
+
+.ProseViewer div.video .video-switcher div,
+.ProseEditor div.video .video-switcher div,
+.ProseNotes div.video .video-switcher div {
+    padding: 0 var(--alxgrn-unit);
+    font-style: normal;
+    font-size: var(--alxgrn-font-size-small);
+    color: var(--alxgrn-button-color);
+    background-color: var(--alxgrn-button-bg);
+    border-radius: var(--alxgrn-unit-small);
+    cursor: pointer;
+    height: var(--alxgrn-unit-double);
+    opacity: .9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.ProseViewer div.video .video-switcher div.active,
+.ProseEditor div.video .video-switcher div.active,
+.ProseNotes div.video .video-switcher div.active {
+    background-color: var(--alxgrn-button-bg-accent);
+}
+
+.ProseViewer div.video .video-switcher div:hover,
+.ProseEditor div.video .video-switcher div:hover,
+.ProseNotes div.video .video-switcher div:hover {
+    opacity: 1;
 }
 
 .ProseViewer div.video .video-title,
@@ -196,7 +226,7 @@
     width: unset;
     padding: 0 var(--alxgrn-unit);
     font-style: normal;
-    font-size: var(--alxgrn-font-size-small)
+    font-size: var(--alxgrn-font-size-small);
 }
 
 .ProseEditor div.image div.image-buttons div:hover,

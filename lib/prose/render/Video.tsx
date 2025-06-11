@@ -2,7 +2,6 @@ import { FC, useEffect, useState } from 'react';
 import { Node } from './ProseRender';
 import { ERROR_EMBED_DATA } from '../../config';
 import { validateRutubeURL, validateVkvideoURL, validateYoutubeURL } from '../../utils/link';
-import { Button } from '@alxgrn/telefrag-ui';
 
 type Props = {
     node: Node;
@@ -53,24 +52,9 @@ const Video: FC<Props> = ({ node }) => {
     return (
         <div className='video'>
             {count > 1 && <div className='video-switcher'>
-                {rutube && <Button
-                    label='RuTube'
-                    size='Small'
-                    type={src === rutube ? 'Accent' : undefined}
-                    onClick={() => setSrc(rutube)}
-                />}
-                {youtube && <Button
-                    label='YouTube'
-                    size='Small'
-                    type={src === youtube ? 'Accent' : undefined}
-                    onClick={() => setSrc(youtube)}
-                />}
-                {vkvideo && <Button
-                    label='VK Video'
-                    size='Small'
-                    type={src === vkvideo ? 'Accent' : undefined}
-                    onClick={() => setSrc(vkvideo)}
-                />}
+                {rutube  && <div onClick={() => setSrc(rutube)}  className={src === rutube  ? 'active' : ''}>RuTube</div>}
+                {youtube && <div onClick={() => setSrc(youtube)} className={src === youtube ? 'active' : ''}>YouTube</div>}
+                {vkvideo && <div onClick={() => setSrc(vkvideo)} className={src === vkvideo ? 'active' : ''}>VK Video</div>}
             </div>}
             <iframe src={src} allow={allow}/>
             {title && <div className='video-title'>{title}</div>}

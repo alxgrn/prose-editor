@@ -2,7 +2,7 @@
  * Кастомное отображение видео для реактора.
  * Необходимо для возможности изменения подписи и URL.
  */
-import { Button, Editable } from "@alxgrn/telefrag-ui";
+import { Editable } from "@alxgrn/telefrag-ui";
 import { NodeViewComponentProps, useEditorEventCallback, useStopEvent } from "@handlewithcare/react-prosemirror";
 import { forwardRef, useEffect, useState } from "react";
 import { validateRutubeURL, validateVkvideoURL, validateYoutubeURL } from "../../utils/link";
@@ -70,24 +70,9 @@ const VideoView = forwardRef<HTMLDivElement, NodeViewComponentProps>(
                 title={nodeProps.node.attrs.title}
             >
                 <div className='video-switcher'>
-                    {rutube && <Button
-                        label='RuTube'
-                        size='Small'
-                        type={src === rutube ? 'Accent' : undefined}
-                        onClick={() => setSrc(rutube)}
-                    />}
-                    {youtube && <Button
-                        label='YouTube'
-                        size='Small'
-                        type={src === youtube ? 'Accent' : undefined}
-                        onClick={() => setSrc(youtube)}
-                    />}
-                    {vkvideo && <Button
-                        label='VK Video'
-                        size='Small'
-                        type={src === vkvideo ? 'Accent' : undefined}
-                        onClick={() => setSrc(vkvideo)}
-                    />}
+                    {rutube  && <div onClick={() => setSrc(rutube)}  className={src === rutube  ? 'active' : ''}>RuTube</div>}
+                    {youtube && <div onClick={() => setSrc(youtube)} className={src === youtube ? 'active' : ''}>YouTube</div>}
+                    {vkvideo && <div onClick={() => setSrc(vkvideo)} className={src === vkvideo ? 'active' : ''}>VK Video</div>}
                 </div>
                 {src ? <iframe src={src} allow={allow} /> : <img src={ERROR_EMBED_DATA} />}
                 <div className='video-title'>
