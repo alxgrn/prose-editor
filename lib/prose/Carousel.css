@@ -7,7 +7,7 @@ div.carousel {
     text-align: center;
     margin: var(--alxgrn-unit) 0;
     /* background-color: var(--alxgrn-bg-main); */
-    border-radius: var(--alxgrn-unit-small);
+    border-radius: var(--alxgrn-unit-half);
     overflow: hidden;
     /* Запрет выделения */
     -webkit-touch-callout: none; /* iOS Safari */
@@ -32,14 +32,14 @@ div.carousel div.carousel-prev,
 div.carousel div.carousel-next {
     position: absolute;
     top: calc(50% - var(--alxgrn-unit));
-    left: var(--alxgrn-unit-half);
+    left: var(--alxgrn-unit-small);
     height: var(--alxgrn-unit-double);
     width: var(--alxgrn-unit-double);
-    color: white;
-    background-color: var(--alxgrn-color-light);
+    color: var(--alxgrn-button-color);
+    background-color: var(--alxgrn-button-bg);
     cursor: pointer;
     border-radius: var(--alxgrn-unit-small);
-
+    opacity: .9;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -47,29 +47,29 @@ div.carousel div.carousel-next {
 
 div.carousel div.carousel-next {
     left: unset;
-    right: var(--alxgrn-unit-half);
+    right: var(--alxgrn-unit-small);
 }
 
 div.carousel div.carousel-numb {
-    top: var(--alxgrn-unit-half);
+    top: var(--alxgrn-unit-small);
     font-size: var(--alxgrn-font-size-small);
-    font-weight: 600;
     font-style: normal;
     padding: 0 var(--alxgrn-unit-half);
     width: unset;
 }
 
 div.carousel div.carousel-full {
-    top: var(--alxgrn-unit-half);
+    top: var(--alxgrn-unit-small);
     left: unset;
-    right: var(--alxgrn-unit-half);
+    right: var(--alxgrn-unit-small);
 }
 
 div.carousel:hover div.carousel-numb:hover,
 div.carousel:hover div.carousel-full:hover,
 div.carousel:hover div.carousel-prev:hover,
 div.carousel:hover div.carousel-next:hover {
-    background-color: var(--alxgrn-color-accent);
+    /* background-color: var(--alxgrn-color-accent); */
+    opacity: 1;
 }
 
 div.carousel div.carousel-list {

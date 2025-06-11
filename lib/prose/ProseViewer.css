@@ -75,9 +75,10 @@
 .ProseViewer div.video .video-switcher,
 .ProseEditor div.video .video-switcher,
 .ProseNotes div.video .video-switcher {
+    position: absolute;
     display: flex;
     gap: var(--alxgrn-unit-small);
-    margin-bottom: var(--alxgrn-unit-small);
+    margin: var(--alxgrn-unit-small);
 }
 
 .ProseViewer div.video .video-title,
@@ -97,7 +98,7 @@
 .ProseEditor div.video img,
 .ProseViewer div.video img {
     display: block;
-    border-radius: var(--alxgrn-unit-small);
+    border-radius: var(--alxgrn-unit-half);
     max-width: 100%;
     max-height: 75vh;
     margin: 0 auto;
@@ -137,11 +138,11 @@
 /* IMAGE BUTTONS WRAPPER */
 .ProseEditor div.image div.image-buttons {
     position: absolute;
-    gap: var(--alxgrn-unit-half);
+    gap: var(--alxgrn-unit-small);
     top: 0;
     right: 0;
     width: auto;
-    margin: var(--alxgrn-unit-half);
+    margin: var(--alxgrn-unit-small);
     display: flex;
     align-items: stretch;
     justify-content: stretch;
@@ -151,11 +152,11 @@
 .ProseEditor div.carousel div.carousel-buttons {
     z-index: 10;
     position: absolute;
-    gap: var(--alxgrn-unit-half);
+    gap: var(--alxgrn-unit-small);
     top: 0;
     left: 0;
     width: auto;
-    margin: var(--alxgrn-unit-half);
+    margin: var(--alxgrn-unit-small);
     display: flex;
     align-items: stretch;
     justify-content: stretch;
@@ -168,13 +169,15 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    color: white;
-    background-color: var(--alxgrn-color-light);
+    color: var(--alxgrn-button-color);
+    background-color: var(--alxgrn-button-bg);
     border-radius: var(--alxgrn-unit-small);
     cursor: pointer;
     height: var(--alxgrn-unit-double);
     width: var(--alxgrn-unit-double);
     padding: 0;
+    opacity: .9;
+    z-index: 100;
 }
 
 .ProseViewer div.image div.image-full {
@@ -184,21 +187,22 @@
 }
 
 .ProseViewer div.image div.image-full:hover {
-    background-color: var(--alxgrn-color-accent);
+    /* background-color: var(--alxgrn-color-accent); */
+    opacity: 1;
 }
 
 .ProseEditor div.image div.image-buttons div.text-button,
 .ProseEditor div.carousel div.carousel-buttons div.text-button {
     width: unset;
-    padding: 0 var(--alxgrn-unit-half);
+    padding: 0 var(--alxgrn-unit);
     font-style: normal;
-    font-weight: 600;
     font-size: var(--alxgrn-font-size-small)
 }
 
 .ProseEditor div.image div.image-buttons div:hover,
 .ProseEditor div.carousel div.carousel-buttons div:hover {
-    background-color: var(--alxgrn-color-accent);
+    /* background-color: var(--alxgrn-color-accent); */
+    opacity: 1;
 }
 
 .ProseNotes div.image div.image-buttons {
@@ -210,7 +214,7 @@
 .ProseEditor div.video iframe,
 .ProseViewer div.video iframe {
     display: block;
-    border-radius: var(--alxgrn-unit-small);
+    border-radius: var(--alxgrn-unit-half);
     width: 100%;
     aspect-ratio: 16 / 9;
     border: none;
