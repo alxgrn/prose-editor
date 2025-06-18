@@ -19,7 +19,7 @@ import './ProseViewer.css';
 //import ColumnResize from "./ColumnResize";
 
 type Props = {
-    content: string | null; // Содержимое статьи
+    content?: string | null; // Содержимое статьи
     onSave: TEditorSaver; // Вызывается при нажатии на кнопку сохранения статьи
     onView?: () => void; // Вызывается при клике на кнопку просмотра статьи
     onChange?: (changed: boolean) => void; // Вызывается при изменении текста статьи
