@@ -20,13 +20,13 @@ import './ProseViewer.css';
 
 type Props = {
     content: string | null; // Содержимое статьи
-    //onView: () => void; // Вызывается при клике на кнопку просмотра статьи
     onSave: TEditorSaver; // Вызывается при нажатии на кнопку сохранения статьи
+    onView?: () => void; // Вызывается при клике на кнопку просмотра статьи
     onChange?: (changed: boolean) => void; // Вызывается при изменении текста статьи
     onUpload?: TImageUploader; // Вызывается после выбора картинки для загрузки на сервер
 };
 
-const ProseEditor: FC<Props> = ({ content, onSave, onChange, onUpload }) => {
+const ProseEditor: FC<Props> = ({ content, onSave, onView, onChange, onUpload }) => {
     const [editorState, setEditorState] = useState<EditorState>();
 
     // Инициализация
@@ -74,7 +74,7 @@ const ProseEditor: FC<Props> = ({ content, onSave, onChange, onUpload }) => {
                     carousel: CarouselView,
                 }}
             >
-                <MenuBar schema={schema} onSave={onSave}/>
+                <MenuBar schema={schema} onSave={onSave} onView={onView}/>
                 <ProseMirrorDoc />
                 {/*<ColumnResize />*/}
             </ProseMirror>

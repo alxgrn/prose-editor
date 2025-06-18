@@ -11,13 +11,15 @@ import SaveButton from './elements/SaveButton';
 import { TEditorSaver } from '../../types';
 import './MenuBar.css';
 import AlignMenu from './elements/AlignMenu';
+import { Icons } from '@alxgrn/telefrag-ui';
 
 type Props = {
     schema: Schema;
     onSave: TEditorSaver;
+    onView?: () => void;
 };
 
-export const MenuBar: FC<Props> = ({ schema, onSave }) => (
+export const MenuBar: FC<Props> = ({ schema, onSave, onView }) => (
     <div className='MenuBar'>    
         <div className='MenuBlock'>
             <HeaderMenu schema={schema}/>
@@ -29,6 +31,11 @@ export const MenuBar: FC<Props> = ({ schema, onSave }) => (
         <AlignMenu schema={schema}/>
         <BlockCommands schema={schema}/>
         <UndoRedo/>
+        {onView && 
+            <div className='MenuItem' onClick={() => onView()}>
+                <Icons.Eye/>
+            </div>
+        }
         <div className='MenuBlock'>
             <SaveButton onSave={onSave}/>
         </div>

@@ -35,7 +35,7 @@
     "prepublishOnly": "npm run build"
   },
   "peerDependencies": {
-    "@alxgrn/telefrag-ui": "^0.0.47",
+    "@alxgrn/telefrag-ui": "^0.0.50",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
   },

@@ -53,13 +53,13 @@ const App = () => {
         <Editor
             content={content}
             onChange={(b) => setIsChanged(b)}
-            //onView={() => {
-            //    setMode('viewer');
-            //    setIsChanged(false);
-            //}}
+            onView={() => {
+                setMode('viewer');
+                setIsChanged(false);
+            }}
             onSave={(data) => new Promise(function(resolve) {
                     setContent(data.content);
-                    setMode('viewer');
+                    // setMode('viewer');
                     setIsChanged(false);
                     console.dir(data.content);
                     getImageIdsFromProse(data.content);

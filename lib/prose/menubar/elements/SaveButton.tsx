@@ -18,6 +18,7 @@ type Props = {
 
 const SaveButton: FC<Props> = ({ onSave, disabled = false, notEmpty = true, wasChanged = true }) => {
     const [ enabled, setEnabled ] = useState(true);
+    const [ isSaving, setIsSaving ] = useState(false);
 
     useEditorEffect((view) => {
         let enabled = false;
@@ -35,8 +36,13 @@ const SaveButton: FC<Props> = ({ onSave, disabled = false, notEmpty = true, wasC
 
         setEnabled(enabled);
     });
-
-    const onClick = useEditorEventCallback((view) => {
+    // Вызов функции сохранения.
+    // ВНИМАНИЕ: Если после вызова этой функции мы не просто сохраним изменения на сервер,
+    // но и изменим content, который подается в компонент редактора, то это приведет к 
+    // реинициализации редактора с новым содержимым. Это в свою очередь сбросит текущее
+    // положение курсора, а не вернет его в положение до нажатия кнопки сохранения.
+    const onClick = useEditorEventCallback(async (view) => {
+        setIsSaving(true);
         try {
             let content: string;
             const fix = fixTables(view.state);
@@ -46,16 +52,19 @@ const SaveButton: FC<Props> = ({ onSave, disabled = false, notEmpty = true, wasC
             } else {
                 content = JSON.stringify(view.state.doc.toJSON());
             }
-            onSave({ content, format: 'prose' });
+            const result = await onSave({ content, format: 'prose' });
+            if (result) throw new Error(result);
+            view.focus();
         } catch (error) {
             console.error(`Can not save doc: ${error}`);
         }
+        setIsSaving(false);
     });
 
     return (<Button
         type='Accent'
-        disabled={disabled || !enabled}
-        label='Сохранить'
+        disabled={disabled || !enabled || isSaving}
+        label={isSaving ? 'Сохраняю' : 'Сохранить'}
         size='Small'
         onClick={onClick}
     />);
