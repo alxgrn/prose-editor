@@ -8,36 +8,37 @@
 }
 
 /* PARAGRAPH */
-.ProseNotes p:first-child,
+.ProseNotes  p,
+.ProseEditor p,
+.ProseViewer p {
+    margin: var(--alxgrn-unit) 0;
+    padding: 0;
+}
+
+.ProseNotes  p:first-child,
 .ProseEditor p:first-child,
 .ProseViewer p:first-child {
     margin-top: 0;
 }
 
-.ProseNotes p:last-child,
+.ProseNotes  p:last-child,
 .ProseEditor p:last-child,
 .ProseViewer p:last-child {
     margin-bottom: 0;
 }
 
 /* LISTS */
-.ProseNotes ul,
+.ProseNotes  ul,
 .ProseEditor ul,
 .ProseViewer ul,
-.ProseNotes ol,
+.ProseNotes  ol,
 .ProseEditor ol,
-.ProseViewer ol,
-.ProseNotes ul p,
-.ProseEditor ul p,
-.ProseViewer ul p,
-.ProseNotes ol p,
-.ProseEditor ol p,
-.ProseViewer ol p {
-    margin: 0;
+.ProseViewer ol {
+    margin: var(--alxgrn-unit) 0;
     padding: 0;
 }
 
-.ProseNotes li,
+.ProseNotes  li,
 .ProseEditor li,
 .ProseViewer li {
     padding: 0;
@@ -46,7 +47,7 @@
 }
 
 /* BLOCKQUOTE */
-.ProseNotes blockquote,
+.ProseNotes  blockquote,
 .ProseEditor blockquote,
 .ProseViewer blockquote {
     display: block;
@@ -59,10 +60,10 @@
 }
 
 /* WRAPPER ARROUND VIDEO AND IMAGE */
-.ProseNotes div.image,
+.ProseNotes  div.image,
 .ProseEditor div.image,
 .ProseViewer div.image,
-.ProseNotes div.video,
+.ProseNotes  div.video,
 .ProseEditor div.video,
 .ProseViewer div.video {
     display: block;
@@ -74,17 +75,17 @@
 /* VIDEO SWITCHER */
 .ProseViewer div.video .video-switcher,
 .ProseEditor div.video .video-switcher,
-.ProseNotes div.video .video-switcher {
+.ProseNotes  div.video .video-switcher {
     position: absolute;
     display: flex;
     gap: var(--alxgrn-unit-small);
     margin: var(--alxgrn-unit-small);
-    z-index: 100;
+    z-index: 10;
 }
 
 .ProseViewer div.video .video-switcher div,
 .ProseEditor div.video .video-switcher div,
-.ProseNotes div.video .video-switcher div {
+.ProseNotes  div.video .video-switcher div {
     padding: 0 var(--alxgrn-unit);
     font-style: normal;
     font-size: var(--alxgrn-font-size-small);
@@ -101,19 +102,19 @@
 
 .ProseViewer div.video .video-switcher div.active,
 .ProseEditor div.video .video-switcher div.active,
-.ProseNotes div.video .video-switcher div.active {
+.ProseNotes  div.video .video-switcher div.active {
     background-color: var(--alxgrn-button-bg-accent);
 }
 
 .ProseViewer div.video .video-switcher div:hover,
 .ProseEditor div.video .video-switcher div:hover,
-.ProseNotes div.video .video-switcher div:hover {
+.ProseNotes  div.video .video-switcher div:hover {
     opacity: 1;
 }
 
 .ProseViewer div.video .video-title,
 .ProseEditor div.video .video-title,
-.ProseNotes div.video .video-title {
+.ProseNotes  div.video .video-title {
     font-style: italic;
     display: block;
     width: 80%;
@@ -121,10 +122,10 @@
 }
 
 /* IMAGE */
-.ProseNotes div.image img,
+.ProseNotes  div.image img,
 .ProseEditor div.image img,
 .ProseViewer div.image img,
-.ProseNotes div.video img,
+.ProseNotes  div.video img,
 .ProseEditor div.video img,
 .ProseViewer div.video img {
     display: block;
@@ -136,7 +137,7 @@
 
 .ProseViewer div.image .image-title,
 .ProseEditor div.image .image-title,
-.ProseNotes div.image .image-title {
+.ProseNotes  div.image .image-title {
     font-style: italic;
     display: block;
     width: 80%;
@@ -207,7 +208,7 @@
     width: var(--alxgrn-unit-double);
     padding: 0;
     opacity: .9;
-    z-index: 100;
+    z-index: 10;
 }
 
 .ProseViewer div.image div.image-full {
@@ -253,7 +254,7 @@
 }
 
 /* CODE BLOCK */
-.ProseNotes pre,
+.ProseNotes  pre,
 .ProseEditor pre,
 .ProseViewer pre {
     white-space: pre-wrap;

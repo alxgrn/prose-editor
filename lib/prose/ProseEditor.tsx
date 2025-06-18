@@ -16,6 +16,7 @@ import { schema } from "./schema";
 import './Carousel.css';
 import './ProseMirror.css';
 import './ProseViewer.css';
+import './ProseEditor.css';
 //import ColumnResize from "./ColumnResize";
 
 type Props = {

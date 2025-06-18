@@ -10,4 +10,5 @@
     background-color: var(--alxgrn-bg-panel);
     z-index: 100;
     padding: var(--alxgrn-unit-half) 0;
+    margin-bottom: var(--alxgrn-unit);
 }
