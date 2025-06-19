@@ -2,9 +2,8 @@ import { FC, useEffect, useState } from "react";
 import { EditorState } from "prosemirror-state";
 import { plugins } from "./plugins";
 import { ProseMirror, ProseMirrorDoc } from "@handlewithcare/react-prosemirror";
-import { TEditorSaver, TImageUploader } from "../types";
+import { TEditorSaver, TImageUploader, TPublication } from "../types";
 import { Node } from "prosemirror-model";
-import { undoDepth } from 'prosemirror-history';
 import MenuBar from "./menubar/MenuBar";
 import VideoView from "./views/VideoView";
 import ImageView from "./views/ImageView";
@@ -28,7 +27,7 @@ type Props = {
 };
 
 const ProseEditor: FC<Props> = ({ content, onSave, onView, onChange, onUpload }) => {
-    const [editorState, setEditorState] = useState<EditorState>();
+    const [ editorState, setEditorState ] = useState<EditorState>();
 
     // Инициализация
     useEffect(() => {
@@ -55,6 +54,17 @@ const ProseEditor: FC<Props> = ({ content, onSave, onView, onChange, onUpload })
         setEditorState(state);
     }, [ content ]);
 
+    // Вызов функции сохранения.
+    // ВНИМАНИЕ: Если после вызова этой функции мы не просто сохраним изменения на сервер,
+    // но и изменим content, который подается в компонент редактора, то это приведет к 
+    // реинициализации редактора с новым содержимым. Это в свою очередь сбросит текущее
+    // положение курсора, а не вернет его в положение до нажатия кнопки сохранения.
+    const onBeforeSave: TEditorSaver = async (data: TPublication) => {
+        const result = await onSave(data);
+        if (onChange) onChange(false);
+        return result;
+    };
+
     if (!editorState) return null;
 
     return (
@@ -63,7 +73,7 @@ const ProseEditor: FC<Props> = ({ content, onSave, onView, onChange, onUpload })
                 state={editorState}
                 dispatchTransaction={(tr) => setEditorState((s) => {
                     const state = s?.apply(tr);
-                    if (state && onChange) onChange(!!undoDepth(state));
+                    if (state && onChange) onChange(true);
                     return state;
                 })}
                 nodeViews={{
@@ -75,7 +85,7 @@ const ProseEditor: FC<Props> = ({ content, onSave, onView, onChange, onUpload })
                     carousel: CarouselView,
                 }}
             >
-                <MenuBar schema={schema} onSave={onSave} onView={onView}/>
+                <MenuBar schema={schema} onSave={onBeforeSave} onView={onView}/>
                 <ProseMirrorDoc />
                 {/*<ColumnResize />*/}
             </ProseMirror>

@@ -87,7 +87,7 @@ const ProseNotes: FC<Props> = ({ title = false, content, onSave, onCancel, onCha
                 {(onSave || onCancel) &&
                 <div className='ProseNotesButtons'>
                     {onCancel && <span className='a small' onClick={onBeforeCancel}>Отменить</span>}
-                    {onSave && <SaveButton onSave={onBeforeSave} disabled={!canSave()} wasChanged={false} />}
+                    {onSave && <SaveButton onSave={onBeforeSave} disabled={!canSave()} />}
                 </div>}
             </ProseMirror>
         </div>

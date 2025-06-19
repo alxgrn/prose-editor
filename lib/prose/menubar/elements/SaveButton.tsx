@@ -4,7 +4,6 @@
  */
 import { useEditorEffect, useEditorEventCallback } from "@handlewithcare/react-prosemirror";
 import { FC, useState } from "react";
-import { undoDepth } from 'prosemirror-history';
 import { Button } from "@alxgrn/telefrag-ui";
 import { TEditorSaver, TNotesSaver } from "../../../types";
 import { fixTables } from "prosemirror-tables";
@@ -13,34 +12,22 @@ type Props = {
     onSave: TEditorSaver|TNotesSaver;
     disabled?: boolean; // принудительно задизейблена
     notEmpty?: boolean; // содержимое редактора не должно быть пустым
-    wasChanged?: boolean; // содержимое редактора должно быть изменено
 };
 
-const SaveButton: FC<Props> = ({ onSave, disabled = false, notEmpty = true, wasChanged = true }) => {
+const SaveButton: FC<Props> = ({ onSave, disabled = false, notEmpty = true }) => {
     const [ enabled, setEnabled ] = useState(true);
     const [ isSaving, setIsSaving ] = useState(false);
 
     useEditorEffect((view) => {
-        let enabled = false;
-        const node = view.state.doc;
-        const size = !!node.textBetween(0, node.content.size, undefined, ' ').length;
-        const undo = !!undoDepth(view.state);
-
-        if (wasChanged && notEmpty) {
-            enabled = size && undo;
-        } else if (wasChanged) {
-            enabled = undo;
-        } else if (notEmpty) {
+        let enabled = true;
+        if (notEmpty) {
+            const node = view.state.doc;
+            const size = !!node.textBetween(0, node.content.size, undefined, ' ').length;
             enabled = size;
-        }
-
+        } 
         setEnabled(enabled);
     });
-    // Вызов функции сохранения.
-    // ВНИМАНИЕ: Если после вызова этой функции мы не просто сохраним изменения на сервер,
-    // но и изменим content, который подается в компонент редактора, то это приведет к 
-    // реинициализации редактора с новым содержимым. Это в свою очередь сбросит текущее
-    // положение курсора, а не вернет его в положение до нажатия кнопки сохранения.
+
     const onClick = useEditorEventCallback(async (view) => {
         setIsSaving(true);
         try {
@@ -54,11 +41,11 @@ const SaveButton: FC<Props> = ({ onSave, disabled = false, notEmpty = true, wasC
             }
             const result = await onSave({ content, format: 'prose' });
             if (result) throw new Error(result);
-            view.focus();
         } catch (error) {
             console.error(`Can not save doc: ${error}`);
         }
         setIsSaving(false);
+        view.focus();
     });
 
     return (<Button
