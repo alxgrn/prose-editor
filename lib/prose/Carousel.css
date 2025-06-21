@@ -35,11 +35,10 @@ div.carousel div.carousel-next {
     left: var(--alxgrn-unit-small);
     height: var(--alxgrn-unit-double);
     width: var(--alxgrn-unit-double);
-    color: var(--alxgrn-button-color);
-    background-color: var(--alxgrn-button-bg);
+    color: var(--prose-button-color);
+    background-color: var(--prose-button-bg);
     cursor: pointer;
     border-radius: var(--alxgrn-unit-small);
-    opacity: .9;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -68,8 +67,8 @@ div.carousel:hover div.carousel-numb:hover,
 div.carousel:hover div.carousel-full:hover,
 div.carousel:hover div.carousel-prev:hover,
 div.carousel:hover div.carousel-next:hover {
-    /* background-color: var(--alxgrn-color-accent); */
-    opacity: 1;
+    color: var(--prose-button-color-hover);
+    background-color: var(--prose-button-bg-hover);
 }
 
 div.carousel div.carousel-list {

@@ -1,3 +1,25 @@
+:root {
+    --prose-button-bg: rgba(136, 136, 136, .9);
+    --prose-button-color: #fff;
+    --prose-button-bg-hover: rgba(136, 136, 136, 1);
+    --prose-button-color-hover: #fff;
+    --prose-button-accent-bg: rgba(70, 130, 180, .9);
+    --prose-button-accent-color: #fff;
+    --prose-button-accent-bg-hover: rgba(70, 130, 180, 1);
+    --prose-button-accent-color-hover: #fff;
+}
+/*
+[data-theme='dark'] {
+    --prose-button-bg: rgba(136, 136, 136, .9);
+    --prose-button-color: #fff;
+    --prose-button-bg-hover: rgba(136, 136, 136, 1);
+    --prose-button-color-hover: #fff;
+    --prose-button-accent-bg: rgba(70, 130, 180, .9);
+    --prose-button-accent-color: #fff;
+    --prose-button-accent-bg-hover: rgba(70, 130, 180, 1);
+    --prose-button-accent-color-hover: #fff;
+}
+*/
 .ProseViewer {
     display: block;
 }
@@ -36,6 +58,28 @@
 .ProseViewer ol {
     margin: var(--alxgrn-unit) 0;
     padding: 0;
+}
+
+/* Списки и параграфы внутри списков делаем без отступов */
+.ProseNotes  ul ul,
+.ProseEditor ul ul,
+.ProseViewer ul ul,
+.ProseNotes  ul ol,
+.ProseEditor ul ol,
+.ProseViewer ul ol,
+.ProseNotes  ol ul,
+.ProseEditor ol ul,
+.ProseViewer ol ul,
+.ProseNotes  ol ol,
+.ProseEditor ol ol,
+.ProseViewer ol ol,
+.ProseNotes  ul p,
+.ProseEditor ul p,
+.ProseViewer ul p,
+.ProseNotes  ol p,
+.ProseEditor ol p,
+.ProseViewer ol p {
+    margin: 0;
 }
 
 .ProseNotes  li,
@@ -89,27 +133,35 @@
     padding: 0 var(--alxgrn-unit);
     font-style: normal;
     font-size: var(--alxgrn-font-size-small);
-    color: var(--alxgrn-button-color);
-    background-color: var(--alxgrn-button-bg);
+    color: var(--prose-button-color);
+    background-color: var(--prose-button-bg);
     border-radius: var(--alxgrn-unit-small);
     cursor: pointer;
     height: var(--alxgrn-unit-double);
-    opacity: .9;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.ProseViewer div.video .video-switcher div.active,
-.ProseEditor div.video .video-switcher div.active,
-.ProseNotes  div.video .video-switcher div.active {
-    background-color: var(--alxgrn-button-bg-accent);
-}
-
 .ProseViewer div.video .video-switcher div:hover,
 .ProseEditor div.video .video-switcher div:hover,
 .ProseNotes  div.video .video-switcher div:hover {
-    opacity: 1;
+    color: var(--prose-button-color-hover);
+    background-color: var(--prose-button-bg-hover);
+}
+
+.ProseViewer div.video .video-switcher div.active,
+.ProseEditor div.video .video-switcher div.active,
+.ProseNotes  div.video .video-switcher div.active {
+    color: var(--prose-button-accent-color);
+    background-color: var(--prose-button-accent-bg);
+}
+
+.ProseViewer div.video .video-switcher div.active:hover,
+.ProseEditor div.video .video-switcher div.active:hover,
+.ProseNotes  div.video .video-switcher div.active:hover {
+    color: var(--prose-button-accent-color-hover);
+    background-color: var(--prose-button-accent-bg-hover);
 }
 
 .ProseViewer div.video .video-title,
@@ -200,14 +252,13 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    color: var(--alxgrn-button-color);
-    background-color: var(--alxgrn-button-bg);
+    color: var(--prose-button-color);
+    background-color: var(--prose-button-bg);
     border-radius: var(--alxgrn-unit-small);
     cursor: pointer;
     height: var(--alxgrn-unit-double);
     width: var(--alxgrn-unit-double);
     padding: 0;
-    opacity: .9;
     z-index: 10;
 }
 
@@ -218,8 +269,8 @@
 }
 
 .ProseViewer div.image div.image-full:hover {
-    /* background-color: var(--alxgrn-color-accent); */
-    opacity: 1;
+    color: var(--prose-button-color-hover);
+    background-color: var(--prose-button-bg-hover);
 }
 
 .ProseEditor div.image div.image-buttons div.text-button,
@@ -232,8 +283,8 @@
 
 .ProseEditor div.image div.image-buttons div:hover,
 .ProseEditor div.carousel div.carousel-buttons div:hover {
-    /* background-color: var(--alxgrn-color-accent); */
-    opacity: 1;
+    color: var(--prose-button-color-hover);
+    background-color: var(--prose-button-bg-hover);
 }
 
 .ProseNotes div.image div.image-buttons {
