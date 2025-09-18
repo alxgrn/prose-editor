@@ -55,13 +55,13 @@
     "vite-plugin-lib-inject-css": "^2.1.1"
   },
   "dependencies": {
-    "@handlewithcare/react-prosemirror": "^2.3.5",
+    "@handlewithcare/react-prosemirror": "^2.5.2",
     "prosemirror-example-setup": "^1.2.3",
     "prosemirror-model": "^1.25.1",
     "prosemirror-schema-basic": "^1.2.4",
     "prosemirror-schema-list": "^1.5.1",
     "prosemirror-state": "^1.4.3",
     "prosemirror-tables": "^1.7.1",
-    "prosemirror-view": "^1.37.1"
+    "prosemirror-view": "^1.39.2"
   }
 }

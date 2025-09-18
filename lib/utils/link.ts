@@ -9,7 +9,7 @@ import { API_URL, EMPTY_IMAGE, VIDEO_IMAGE } from "../config";
 export const validateVkvideoURL = (stringURL: string | URL, getSanitized?: boolean) => {
     try {
         const url = new URL(stringURL);
-        if (url.hostname !== 'vkvideo.ru' && url.hostname !== 'vk.com') throw new Error();
+        if (url.hostname !== 'vkvideo.ru' && url.hostname !== 'vk.com' && url.hostname !== 'vk.ru') throw new Error();
         let id: string | null;
         let oid: string | null;
         if (url.pathname === '/video_ext.php') {
@@ -102,6 +102,7 @@ export const sanitizeVideoURL = (stringURL: string) => {
         switch (url.hostname) {
             case 'vkvideo.ru':
             case 'vk.com':
+            case 'vk.ru':
                 return validateVkvideoURL(url, true) + '';
             case 'rutube.ru':
                 return validateRutubeURL(url, true) + '';
