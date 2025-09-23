@@ -1,6 +1,6 @@
 import { FC, useEffect, useRef, useState } from 'react';
 import { Node } from './ProseRender';
-import { API_URL, ERROR_IMAGE_DATA } from '../../config';
+import { API_URL, ERROR_IMAGE } from '../../utils/config';
 import { Icons } from '@alxgrn/telefrag-ui';
 /**
  * TODO: Разобраться со странным поведением обработки нажатия на кнопки вправо/влево:
@@ -115,8 +115,8 @@ const Image: FC<ImageProps> = ({ node, onClick }) => {
         let alt = node.attrs?.alt ? `${node.attrs.alt}` : '';
         let title = node.attrs?.title ? `${node.attrs.title}` : '';
         
-        if (fid) src = `${API_URL}/files/${fid}`;
-        if (!src) src = ERROR_IMAGE_DATA;
+        if (fid) src = `${API_URL}/${fid}`;
+        if (!src) src = ERROR_IMAGE;
 
         setSrc(src);
         setAlt(alt);

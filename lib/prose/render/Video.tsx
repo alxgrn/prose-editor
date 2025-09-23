@@ -1,6 +1,6 @@
 import { FC, useEffect, useState } from 'react';
 import { Node } from './ProseRender';
-import { ERROR_EMBED_DATA } from '../../config';
+import { ERROR_EMBED } from '../../utils/config';
 import { validateRutubeURL, validateVkvideoURL, validateYoutubeURL } from '../../utils/link';
 
 type Props = {
@@ -44,7 +44,7 @@ const Video: FC<Props> = ({ node }) => {
 
     if (!count) return (
         <div className='image'>
-            <img src={ERROR_EMBED_DATA}/>
+            <img src={ERROR_EMBED}/>
             {title && <div className='image-title'>{title}</div>}
         </div>
     );

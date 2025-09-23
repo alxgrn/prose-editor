@@ -1,6 +1,6 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { content as initialContent } from './content';
-import { Editor, Notes, Viewer } from '../lib';
+import { Editor, Notes, Viewer, setConfig } from '../lib';
 import ModeSelector from './ModeSelector';
 import { getImageIdsFromProse } from '../lib/utils/utils';
 import './App.css';
@@ -9,6 +9,16 @@ const App = () => {
     const [ content, setContent ] = useState(initialContent);
     const [ isChanged, setIsChanged ] = useState(false);
     const [ mode, setMode ] = useState<string>('editor');
+
+    useEffect(() => {
+        setConfig({
+            api_url: 'https://dailytelefrag.ru/api/files',
+            video_image: 'https://dailytelefrag.ru/video.png',
+            empty_image: 'https://dailytelefrag.ru/empty.png',
+            error_image: 'https://dailytelefrag.ru/error_image.png',
+            error_embed: 'https://dailytelefrag.ru/error_embed.png',
+        });
+    }, []);
 
     // Имитируем загрузку картинки на сервер
     const onUpload = () => {

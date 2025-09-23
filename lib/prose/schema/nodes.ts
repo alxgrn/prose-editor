@@ -2,7 +2,7 @@
  * Наши типы узлов
  */
 import { NodeSpec } from 'prosemirror-model';
-import { API_URL, ERROR_EMBED_DATA, ERROR_IMAGE_DATA } from '../../config';
+import { API_URL, ERROR_EMBED, ERROR_IMAGE } from '../../utils/config';
 import { sanitizeVideoURL } from '../../utils/link';
 
 // Переделали базовую картинку из инлайн в блок
@@ -26,8 +26,8 @@ export const image: NodeSpec = {
     }}],
     toDOM(node) {
         let { fid, src, alt, title } = node.attrs;
-        if (fid) src = `${API_URL}/files/${fid}`;
-        if (!src) src = ERROR_IMAGE_DATA;
+        if (fid) src = `${API_URL}/${fid}`;
+        if (!src) src = ERROR_IMAGE;
         return ['div', { title, class: 'image' }, [ 'img', { fid, src, alt, title }]];
     }
 };
@@ -60,7 +60,7 @@ export const video: NodeSpec = {
         const allow = 'fullscreen; accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
         const url = Array.isArray(src) ? src[0] : src;
         if (!sanitizeVideoURL(url)) {
-            return ['div', { title, class: 'image' }, [ 'img', { src: ERROR_EMBED_DATA }]];
+            return ['div', { title, class: 'image' }, [ 'img', { src: ERROR_EMBED }]];
         } 
         return ['div', { title, class: 'video' }, [ 'iframe', { src: url, title, allow }]];
     }

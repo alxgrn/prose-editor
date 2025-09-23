@@ -3,6 +3,7 @@ import Editor from "./prose/ProseEditor";
 import Viewer from "./prose/ProseViewer";
 import DOM from "./prose/ProseViewerDom";
 import { htmlToProse } from "./utils/convert";
+import { setConfig, type TConfig } from "./utils/config";
 
 export {
     Notes,
@@ -10,6 +11,7 @@ export {
     Viewer,
     DOM,
     htmlToProse,
+    setConfig,
 };
 
 import {
@@ -26,4 +28,5 @@ export type {
     TNotesSaver,
     TPublication,
     TPublicationFormat,
+    TConfig,
 };

@@ -1,4 +1,4 @@
-import { API_URL, EMPTY_IMAGE, VIDEO_IMAGE } from "../config";
+import { API_URL, EMPTY_IMAGE, VIDEO_IMAGE } from "./config";
 /**
  * Валидация ссылки на VK Video
  * @param stringURL URL для валидации
@@ -149,6 +149,6 @@ export const getVideoPreview = (videoURL: string) => {
  */
 export const sanitizeImageURL = (url?: string | number | null) => {
     if (typeof url === 'string') return url;
-    if (typeof url === 'number') return `${API_URL}/files/${url}`;
+    if (typeof url === 'number') return `${API_URL}/${url}`;
     return EMPTY_IMAGE;
 };

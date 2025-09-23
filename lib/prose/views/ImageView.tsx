@@ -5,7 +5,7 @@
 import { Editable, Icons } from "@alxgrn/telefrag-ui";
 import { NodeViewComponentProps, useEditorEffect, useEditorEventCallback, useStopEvent } from "@handlewithcare/react-prosemirror";
 import { forwardRef, useState } from "react";
-import { API_URL } from "../../config";
+import { API_URL } from "../../utils/config";
 
 const ImageView = forwardRef<HTMLDivElement, NodeViewComponentProps>(
     function Image({ children, nodeProps, ...props }, outerRef) {
@@ -105,7 +105,7 @@ const ImageView = forwardRef<HTMLDivElement, NodeViewComponentProps>(
                     title={nodeProps.node.attrs.title}
                     //fid={nodeProps.node.attrs.fid}
                     alt={nodeProps.node.attrs.alt}
-                    src={nodeProps.node.attrs.fid ? `${API_URL}/files/${nodeProps.node.attrs.fid}` : nodeProps.node.attrs.src}
+                    src={nodeProps.node.attrs.fid ? `${API_URL}/${nodeProps.node.attrs.fid}` : nodeProps.node.attrs.src}
                 />
                 <div className='image-title'>
                     <Editable

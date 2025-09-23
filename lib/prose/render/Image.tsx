@@ -1,6 +1,6 @@
 import { FC, MouseEvent, useEffect, useRef, useState } from 'react';
 import { Node } from './ProseRender';
-import { API_URL, ERROR_IMAGE_DATA } from '../../config';
+import { API_URL, ERROR_IMAGE } from '../../utils/config';
 import { Icons } from '@alxgrn/telefrag-ui';
 
 type Props = {
@@ -27,8 +27,8 @@ const Image: FC<Props> = ({ node }) => {
     useEffect(() => {
         let fid = node.attrs?.fid;
         let src = node.attrs?.src ? `${node.attrs?.src}` : '';
-        if (fid) src = `${API_URL}/files/${fid}`;
-        if (!src) src = ERROR_IMAGE_DATA;
+        if (fid) src = `${API_URL}/${fid}`;
+        if (!src) src = ERROR_IMAGE;
         setSrc(src);
         setAlt(node.attrs?.alt ? `${node.attrs?.alt}`: '');
         setTitle(node.attrs?.title ? `${node.attrs?.title}`: '');

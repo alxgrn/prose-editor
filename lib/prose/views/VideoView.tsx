@@ -6,7 +6,7 @@ import { Editable } from "@alxgrn/telefrag-ui";
 import { NodeViewComponentProps, useEditorEventCallback, useStopEvent } from "@handlewithcare/react-prosemirror";
 import { forwardRef, useEffect, useState } from "react";
 import { validateRutubeURL, validateVkvideoURL, validateYoutubeURL } from "../../utils/link";
-import { ERROR_EMBED_DATA } from "../../config";
+import { ERROR_EMBED } from "../../utils/config";
 
 
 const VideoView = forwardRef<HTMLDivElement, NodeViewComponentProps>(
@@ -74,7 +74,7 @@ const VideoView = forwardRef<HTMLDivElement, NodeViewComponentProps>(
                     {youtube && <div onClick={() => setSrc(youtube)} className={src === youtube ? 'active' : ''}>YouTube</div>}
                     {vkvideo && <div onClick={() => setSrc(vkvideo)} className={src === vkvideo ? 'active' : ''}>VK Video</div>}
                 </div>
-                {src ? <iframe src={src} allow={allow} /> : <img src={ERROR_EMBED_DATA} />}
+                {src ? <iframe src={src} allow={allow} /> : <img src={ERROR_EMBED} />}
                 <div className='video-title'>
                     <Editable
                         value={title}
