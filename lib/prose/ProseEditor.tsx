@@ -73,7 +73,7 @@ const ProseEditor: FC<Props> = ({ content, onSave, onView, onChange, onUpload })
                 state={editorState}
                 dispatchTransaction={(tr) => setEditorState((s) => {
                     const state = s?.apply(tr);
-                    if (state && onChange) onChange(true);
+                    if (state && tr.docChanged && onChange) onChange(true);
                     return state;
                 })}
                 nodeViews={{

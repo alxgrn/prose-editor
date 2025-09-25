@@ -1,6 +1,5 @@
 import { FC, useEffect, useState } from "react";
 import { EditorState } from "prosemirror-state";
-import { undoDepth } from 'prosemirror-history';
 import { plugins } from "./plugins";
 import { ProseMirror, ProseMirrorDoc } from "@handlewithcare/react-prosemirror";
 import { TImageUploader, TNotesSaver, TPublication } from "../types";
@@ -72,7 +71,7 @@ const ProseNotes: FC<Props> = ({ title = false, content, onSave, onCancel, onCha
                 state={editorState}
                 dispatchTransaction={(tr) => setEditorState((s) => {
                     const state = s?.apply(tr);
-                    if (state && onChange) onChange(!!undoDepth(state));
+                    if (state && tr.docChanged && onChange) onChange(true);
                     return state;
                 })}
                 nodeViews={{
