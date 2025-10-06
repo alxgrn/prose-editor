@@ -17,9 +17,12 @@ export const image: NodeSpec = {
     },
     group: 'block',
     parseDOM: [{tag: 'img[src]', getAttrs(dom: HTMLElement) {
+        let src = dom.getAttribute('src');
+        if (!src) src = ERROR_IMAGE;
+        if (src.startsWith('data:')) src = ERROR_IMAGE;
         return {
+            src,
             fid: dom.getAttribute('fid'),
-            src: dom.getAttribute('src'),
             alt: dom.getAttribute('alt'),
             title: dom.getAttribute('title'),
         }
