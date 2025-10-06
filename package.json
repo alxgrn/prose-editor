@@ -35,14 +35,14 @@
     "prepublishOnly": "npm run build"
   },
   "peerDependencies": {
-    "@alxgrn/telefrag-ui": "^0.0.54",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "@alxgrn/telefrag-ui": "^0.0.55",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0"
   },
   "devDependencies": {
     "@types/node": "^22.1.0",
-    "@types/react": "^19.0.12",
-    "@types/react-dom": "^19.0.4",
+    "@types/react": "^19.2.0",
+    "@types/react-dom": "^19.2.0",
     "@typescript-eslint/eslint-plugin": "^6.10.0",
     "@typescript-eslint/parser": "^6.10.0",
     "@vitejs/plugin-react": "^4.2.0",
