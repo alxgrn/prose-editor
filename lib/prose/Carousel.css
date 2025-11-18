@@ -71,6 +71,20 @@ div.carousel:hover div.carousel-next:hover {
     background-color: var(--prose-button-bg-hover);
 }
 
+/* Показываем эти кнопки только при наведении курсором */
+div.carousel div.carousel-full,
+div.carousel div.carousel-prev,
+div.carousel div.carousel-next {
+    display: none;
+}
+
+div.carousel:hover div.carousel-full,
+div.carousel:hover div.carousel-prev,
+div.carousel:hover div.carousel-next {
+    display: flex;
+}
+
+/* Список слайдов */
 div.carousel div.carousel-list {
     display: flex;
     align-items: center;

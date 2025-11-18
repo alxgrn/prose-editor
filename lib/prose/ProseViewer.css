@@ -116,6 +116,24 @@
     position: relative;
 }
 
+.ProseNotes  div.image:first-child,
+.ProseEditor div.image:first-child,
+.ProseViewer div.image:first-child,
+.ProseNotes  div.video:first-child,
+.ProseEditor div.video:first-child,
+.ProseViewer div.video:first-child {
+    margin-top: 0;
+}
+
+.ProseNotes  div.image:last-child,
+.ProseEditor div.image:last-child,
+.ProseViewer div.image:last-child,
+.ProseNotes  div.video:last-child,
+.ProseEditor div.video:last-child,
+.ProseViewer div.video:last-child {
+    margin-bottom: 0;
+}
+
 /* VIDEO SWITCHER */
 .ProseViewer div.video .video-switcher,
 .ProseEditor div.video .video-switcher,
@@ -263,9 +281,14 @@
 }
 
 .ProseViewer div.image div.image-full {
+    display: none;
     position: absolute;
     top: var(--alxgrn-unit-half);
     right: var(--alxgrn-unit-half);
+}
+
+.ProseViewer div.image:hover div.image-full {
+    display: flex;
 }
 
 .ProseViewer div.image div.image-full:hover {
